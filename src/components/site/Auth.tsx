@@ -58,7 +58,7 @@ export const Auth = () => {
         console.log(values);
 
         try {
-            const response = await fetch(`http://localhost:${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/register`, {
+            const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/register`, {
               method: "POST",
               headers: {
                   "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export const Auth = () => {
         setIsAuthButtonLoading(true);
         try {
             // @ts-ignore
-            const response = await fetch(`http://localhost:${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/login`, {
+            const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
