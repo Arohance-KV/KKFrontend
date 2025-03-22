@@ -1,11 +1,11 @@
-const getAllCollections = () => {
+export const getAllCollections = () => {
     
 };
 
-const getAllProducts = () => {
+export const getAllProducts = () => {
 
 };
 
-const getAllUsers = () => {
+export const getAllUsers = () => {
 
 };

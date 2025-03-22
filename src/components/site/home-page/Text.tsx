@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { getDiamondPrice } from "../../../utils/CalculateTotal";
@@ -18,7 +18,8 @@ export default function HoverText() {
         <Input id="solitare-weight" placeholder="Solitare weight" className="w-[200px]" type="number"/>
         <Input id="multidiamond-weight" placeholder="Multi diamond weight" className="w-[200px]" type="number"/>
         <Button onClick={() => {
-          const result = getDiamondPrice({karat: parseFloat(document.getElementById("karat").value), netWeight: parseFloat(document.getElementById("net-weight").value), solitareWeight: parseFloat(document.getElementById("solitare-weight").value), multiDiaWeight: parseFloat(document.getElementById("multidiamond-weight").value) })
+          const inputElement = document.getElementById("karat") as HTMLInputElement;
+          const result = getDiamondPrice({karat: parseFloat(inputElement.value), netWeight: parseFloat((document.getElementById("net-weight") as HTMLInputElement).value), solitareWeight: parseFloat((document.getElementById("solitare-weight") as HTMLInputElement).value), multiDiaWeight: parseFloat((document.getElementById("multidiamond-weight") as HTMLInputElement).value) })
           alert(`total price = ₹${result}`);
           // console.log(parseFloat(document.getElementById("karat").value), parseFloat(document.getElementById("net-weight").value), parseFloat(document.getElementById("net-weight").value), parseFloat(document.getElementById("solitare-weight").value), document.getElementById("multidiamond-weight").value);
         }}>Calculate</Button>

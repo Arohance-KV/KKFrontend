@@ -1,7 +1,7 @@
-import { Loader, Minus, Plus, Trash2, X } from "lucide-react";
+import { Loader, Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "../../ui/button";
 import { UIsideBar } from "./Solitare";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { ICartItem, IProduct, IUser, IWishListItem } from "@/utils/interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -10,27 +10,27 @@ import { toast } from "sonner";
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 import { ToastSuccess } from "@/utils/UtilityComponents";
 
-const videoCalls = [
-    {
-        name: "Ring", 
-        code: "123",
-        price: 5000,
-        isInCart: true
-    },
-    {
-        name: "Earing", 
-        code: "1234",
-        price: 2500,
-        isInCart: false
-    },
-    {
-        name: "Ring", 
-        code: "123",
-        price: 5000,
-        isInCart: false
-    },
+// const videoCalls = [
+//     {
+//         name: "Ring", 
+//         code: "123",
+//         price: 5000,
+//         isInCart: true
+//     },
+//     {
+//         name: "Earing", 
+//         code: "1234",
+//         price: 2500,
+//         isInCart: false
+//     },
+//     {
+//         name: "Ring", 
+//         code: "123",
+//         price: 5000,
+//         isInCart: false
+//     },
 
-]
+// ]
 
 export const VideoCartPage = () => {
 
@@ -39,13 +39,14 @@ export const VideoCartPage = () => {
     const [ cart, setCart ] = useState<Array<ICartItem>>([]);
     const [ wishList, setWishList ] = useState<Array<IWishListItem>>([]);
     // console.log(typeof wishListData, wishListData?.length, typeof JSON.parse(localStorage.getItem("wishList")!));
-
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
         setVideoCallCartData(customerData?._id ? customerData?.videoCallCart : JSON.parse(localStorage.getItem("videoCallCart")!));
         setCart(customerData?._id ? customerData?.cart : JSON.parse(localStorage.getItem("cart")!)); 
         console.log(cart, videoCallCartData, customerData, videoCallCartData?.[0]);
+        setWishList(customerData?.wishList);
     }, [ customerData ]);
 
 

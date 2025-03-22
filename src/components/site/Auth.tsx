@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 import { Button } from "../ui/button";
 import { useState } from "react";
-import { Eye, EyeClosed, Loader2, LockKeyholeIcon, LucideMail } from "lucide-react";
+import { Loader2, LockKeyholeIcon, LucideMail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "@/redux/slices/userSlice";
 import { useDispatch } from "react-redux";
@@ -132,6 +132,9 @@ export const Auth = () => {
     }
 
     const [ showPassword, setShowPassword ] = useState(false);
+
+    console.log(setShowPassword);
+    
 
     const [ isSignUp, setIsSignUp ] = useState(false);
 

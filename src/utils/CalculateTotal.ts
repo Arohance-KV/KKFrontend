@@ -25,6 +25,6 @@ export const getDiamondPrice = ({ karat, netWeight, diamondWeight, solitareWeigh
     const makingCharges = grossWeight * 1200;
     const subTotal = GoldRate + diamondRate + makingCharges;
     const total = subTotal + (subTotal * (GST / 100));
-    console.log(grossWeight, GoldRate, solitareRate, multiDiaRate, diamondRate, makingCharges, subTotal, total);
+    console.log(grossWeight, GoldRate, solitareRate, multiDiaRate, diamondRate, makingCharges, diamondWeight, subTotal, total);
     return subTotal;
 };

@@ -1,9 +1,9 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const DashboardSidebar = () => {
 
-    const [isSelected, setIsSelected] = useState();
+    // const [isSelected, setIsSelected] = useState();
 
     return (
         <section className="bg-[#E4E2D6] w-[300px] h-full flex flex-col">
