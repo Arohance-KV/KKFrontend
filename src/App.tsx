@@ -20,8 +20,9 @@ function App() {
   useEffect(() => {
     (async function verify() {
       try {
+        console.log(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}`);
           // @ts-ignore
-          const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/current-user`, {
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/current-user`, {
               method: "GET",
               headers: {
                   "Content-Type": "application/json",
@@ -61,7 +62,7 @@ function App() {
     (async function() {
         try {
             // @ts-ignore
-            const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}products/get-all-products`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}products/get-all-products`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -83,7 +84,7 @@ function App() {
     (async function () {
         try {
             // @ts-ignore
-            const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}categories/get-all-categories`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}categories/get-all-categories`);
         
             const data = await response.json();
         
@@ -102,7 +103,7 @@ function App() {
     (async function () {
         try {
             // @ts-ignore
-            const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}collections/get-all-collections`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}collections/get-all-collections`);
         
             const data = await response.json();
         
@@ -122,7 +123,7 @@ function App() {
     (async function () {
         try {
             // @ts-ignore
-            const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}banners/get-all-banners-from-a-type/partner-banner`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}banners/get-all-banners-from-a-type/partner-banner`);
         
             const data = await response.json();
         
@@ -140,7 +141,7 @@ function App() {
     (async function () {
         try {
             // @ts-ignore
-            const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}banners/get-all-banners-from-a-type/hero-section-banner`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}banners/get-all-banners-from-a-type/hero-section-banner`);
         
             const data = await response.json();
         

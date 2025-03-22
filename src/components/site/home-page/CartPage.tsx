@@ -84,7 +84,7 @@ export const CartPage = () => {
                                         if ( code ) {
                                             try {
                                                 // @ts-ignore
-                                                const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}coupons/verify-coupon`, {
+                                                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}coupons/verify-coupon`, {
                                                     method: "POST",
                                                     headers: {
                                                         "Content-Type": "application/json",
@@ -123,7 +123,7 @@ export const CartPage = () => {
                                     setIsPlaceOrderButtonLoading(true);
                                     try {
                                         // @ts-ignore
-                                        const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}payment/create-an-order/`, {
+                                        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}payment/create-an-order/`, {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json",
@@ -153,7 +153,7 @@ export const CartPage = () => {
                                             "handler": async function (res : any){
                                                 try {
                                                     console.log(res);
-                                                    const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}payment/order/validate`, {
+                                                    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}payment/order/validate`, {
                                                         method: "POST",
                                                         headers: {
                                                             "Content-Type": "application/json",
@@ -175,7 +175,7 @@ export const CartPage = () => {
                                                     console.log(data, response);
 
                                                     console.log(response);
-                                                    const orderResponse = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}orders/create-an-order`, {
+                                                    const orderResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}orders/create-an-order`, {
                                                         method: "POST",
                                                         headers: {
                                                             "Content-Type": "application/json",

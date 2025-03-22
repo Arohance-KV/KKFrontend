@@ -51,7 +51,7 @@ export const ProductPage = () => {
     const getProductFromId = async () => {
         try {
             // @ts-ignore
-            const response = await fetch(`${import.meta.env.vite_backend_url}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}products/get-product/${productId}`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}products/get-product/${productId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
