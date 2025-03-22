@@ -1,5 +1,5 @@
-import { CircleUser, Heart, Search, ShoppingCart, Store, Video } from "lucide-react";
-import { Input } from "../../ui/input";
+import { CircleUser, Heart, ShoppingCart, Store, Video } from "lucide-react";
+// import { Input } from "../../ui/input";
 import { Link } from "react-router-dom";
 import { Button } from "../../ui/button";
 import { Badge } from "@/components/ui/badge";

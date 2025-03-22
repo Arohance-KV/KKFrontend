@@ -1,5 +1,5 @@
-import { ArrowUpDown, Filter, Search } from "lucide-react";
-import { Input } from "../../ui/input";
+import { ArrowUpDown } from "lucide-react";
+// import { Input } from "../../ui/input";
 import { UIsideBar } from "./Solitare"
 import { Button } from "../../ui/button";
 import { useSelector } from "react-redux";
@@ -50,7 +50,7 @@ export const Collections = () => {
         setCollections(collectionsFromStore);
     }, [ collectionsFromStore ]);
 
-    const [ showFilter, setShowFilter ] = useState<Boolean>(true);
+    // const [ showFilter, setShowFilter ] = useState<Boolean>(true);
     const [ showSortOptions, setShowSortOptions ] = useState<Boolean>(false); 
 
     return (

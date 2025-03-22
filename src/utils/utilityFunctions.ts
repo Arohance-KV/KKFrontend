@@ -1,9 +1,9 @@
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
-import { ICartItem, IProduct, IWishListItem } from "./interfaces";
+import { ICartItem, IWishListItem } from "./interfaces";
 import { setCustomerData } from "../redux/slices/websiteSlice";
 
 export const updateWishList = async ( wishListItem: IWishListItem, isAdd: boolean, currentWishlist: IWishListItem[], dispatch: Dispatch<UnknownAction>, isUserPresent: boolean, cart?: ICartItem[], videoCallCart?: ICartItem[] ) => {
-    
+    console.log(videoCallCart);
     // const dispatch = useDispatch();
     // const currentWishlist = useSelector((state:any) => state?.website?.customerData?.wishList);
     let newWishList = [ ...currentWishlist, wishListItem ];

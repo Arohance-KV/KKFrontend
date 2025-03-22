@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { UIsideBar } from "../home-page/Solitare";
 import { useEffect, useState } from "react";
 import { ICartItem, IProduct, IUser, IWishListItem } from "../../../utils/interfaces";
-import EmblaCarousel from "./carousel-components/EmblaCarousel";
+// import EmblaCarousel from "./carousel-components/EmblaCarousel";
 import "./../../../index.css";
 import { Button } from "../../ui/button";
 import { updateCart, updateVideoCallCart, updateWishList } from "../../../utils/utilityFunctions";
@@ -28,8 +28,10 @@ export const ProductPage = () => {
     const [ isInWishList, setIsInWishList ] = useState<boolean>(false);
     const [ isInCart, setIsInCart ] = useState<boolean>(false);
     const [ isInVideoCallCart, setIsInVideoCallCart ] = useState(false);
+    // @ts-ignore
     const [ isWishListAddedButtonLoading, setIsWishListAddedButtonLoading ] = useState<boolean>(false);
     const [ isCartAddedButtonLoading, setIsCartAddedButtonLoading ] = useState<boolean>(false);
+    // @ts-ignore
     const [ isInVideoCallCartButtonLoading, setIsInVideoCallCartButtonLoading ] = useState(false);
 
     useEffect(() => {

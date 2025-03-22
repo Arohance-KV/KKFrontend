@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
-import { IGiftCard, IOrder, IUser } from "@/utils/interfaces";
+import { IUser } from "@/utils/interfaces";
 import { Check, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -22,84 +22,84 @@ const formSchema = z.object({
     company: z.string().optional(),
 });
 
-const userDetailsFormSchema = z.object({
-    firstName: z.string().min(1, "Field is required!"),
-    lastName: z.string().min(1, "Field is required!"),
-    email: z.string().email("Please enter a valid email!"),
-    birthDate: z.string().optional(),
-    gender: z.string().optional(),
-    anivarsary: z.string().optional(),
-    spouseBirthday: z.string().optional(),
-});
-const orders : IOrder[] = [
-    {
-        orderId: "1",
-        customerId: "1",
-        total: 5000,
-        orderStatus: "Fulfilled",
-    },
-    {
-        orderId: "1",
-        customerId: "1",
-        total: 5000,
-        orderStatus: "Fulfilled",
-    },
-    {
-        orderId: "1",
-        customerId: "1",
-        total: 5000,
-        orderStatus: "Fulfilled",
-        note: "Hello"
-    },
-];
+// const userDetailsFormSchema = z.object({
+//     firstName: z.string().min(1, "Field is required!"),
+//     lastName: z.string().min(1, "Field is required!"),
+//     email: z.string().email("Please enter a valid email!"),
+//     birthDate: z.string().optional(),
+//     gender: z.string().optional(),
+//     anivarsary: z.string().optional(),
+//     spouseBirthday: z.string().optional(),
+// });
+// const orders : IOrder[] = [
+//     {
+//         orderId: "1",
+//         customerId: "1",
+//         total: 5000,
+//         orderStatus: "Fulfilled",
+//     },
+//     {
+//         orderId: "1",
+//         customerId: "1",
+//         total: 5000,
+//         orderStatus: "Fulfilled",
+//     },
+//     {
+//         orderId: "1",
+//         customerId: "1",
+//         total: 5000,
+//         orderStatus: "Fulfilled",
+//         note: "Hello"
+//     },
+// ];
 
-const videoCalls : {
-    name: String,
-    phoneNo: Number,
-    status: "Pending" | "Concluded" ,
-    email: String,
-    createdAt: String,
-}[] = [
-    {
-        name: "hello",
-        phoneNo: 1234567890,
-        status: "Pending",
-        email: "email",
-        createdAt: "Some time ago"
-    },
-    {
-        name: "hello",
-        phoneNo: 1234567890,
-        status: "Pending",
-        email: "email",
-        createdAt: "Some time ago"
-    },
-    {
-        name: "hello",
-        phoneNo: 1234567890,
-        status: "Pending",
-        email: "email",
-        createdAt: "Some time ago"
-    },
-];
+// const videoCalls : {
+//     name: String,
+//     phoneNo: Number,
+//     status: "Pending" | "Concluded" ,
+//     email: String,
+//     createdAt: String,
+// }[] = [
+//     {
+//         name: "hello",
+//         phoneNo: 1234567890,
+//         status: "Pending",
+//         email: "email",
+//         createdAt: "Some time ago"
+//     },
+//     {
+//         name: "hello",
+//         phoneNo: 1234567890,
+//         status: "Pending",
+//         email: "email",
+//         createdAt: "Some time ago"
+//     },
+//     {
+//         name: "hello",
+//         phoneNo: 1234567890,
+//         status: "Pending",
+//         email: "email",
+//         createdAt: "Some time ago"
+//     },
+// ];
 
-const giftCard: IGiftCard = {
-    code: "code",
-    amount: 0,
-    occasion: "occasion",
-    recipientName: "name",
-    recipientEmail: "email",
-    recipientPhone: 0,
-    sender: "sender",
-    message: "message",
-    validUpto: "sometime in the future",
-    used: true,
-    price: 12,
-    imageUrl: {
-        url: "string",
-        publicId: "string"
-    }
-}
+// const giftCard: IGiftCard = {
+//     code: "code",
+//     amount: 0,
+//     occasion: "occasion",
+//     recipientName: "name",
+//     recipientEmail: "email",
+//     recipientPhone: 0,
+//     sender: "sender",
+//     message: "message",
+//     validUpto: "sometime in the future",
+//     used: true,
+//     price: 12,
+//     imageUrl: {
+//         url: "string",
+//         publicId: "string"
+//     }
+// }
 
 export const AccountSettings = () => {
 

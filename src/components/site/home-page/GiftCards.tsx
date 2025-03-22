@@ -1,14 +1,14 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form';
-import { RadioGroup, RadioGroupItem } from '../../ui/radio-group';
-import { Label } from '../../ui/label';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage } from '../../ui/form';
+// import { RadioGroup, RadioGroupItem } from '../../ui/radio-group';
+// import { Label } from '../../ui/label';
 import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
 import { Button } from '../../ui/button';
-import { Checkbox } from '../../ui/checkbox';
+// import { Checkbox } from '../../ui/checkbox';
 import { cn } from '../../../lib/utils';
 
 const GIFTCARDS = [
@@ -29,63 +29,6 @@ const GIFTCARDS = [
     },
     {
         name: "valentines"
-    },
-];
-
-const shapeOptions = [
-    {
-      value: 'Round',
-      label: 'Round',
-      imgSrc: '../../../../public/solitare-shapes/gemstone_10582460.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
-    },
-    {
-      value: 'Pear',
-      label: 'Pear',
-      imgSrc: '../../../../public/solitare-shapes/pear.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
-    },
-    {
-      value: 'Heart',
-      label: 'Heart',
-      imgSrc: '../../../../public/solitare-shapes/heart.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
-    },
-    {
-      value: 'Princess',
-      label: 'Princess',
-      imgSrc: '../../../../public/solitare-shapes/princess.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
-    },
-    {
-      value: 'Marquise',
-      label: 'Marquise',
-      imgSrc: '../../../../public/solitare-shapes/marquise.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
-    },
-    {
-      value: 'Oval',
-      label: 'Oval',
-      imgSrc: '../../../../public/solitare-shapes/oval.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
-    },
-    {
-      value: 'Emerald',
-      label: 'Emerald',
-      imgSrc: '../../../../public/solitare-shapes/emerald.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
-    },
-    {
-      value: 'Radiant',
-      label: 'Radiant',
-      imgSrc: '../../../../public/solitare-shapes/radiant.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
-    },
-    {
-      value: 'Cushion',
-      label: 'Cushion',
-      imgSrc: '../../../../public/solitare-shapes/cushion.png',
-      gradient: 'from-[#C8C8C8] to-[#E9E9E9]',
     },
 ];
   
@@ -193,6 +136,8 @@ export const GiftCards = () => {
                                         <p className='text-center'>Select a gift card</p>
                                         <div className='grid grid-cols-2 max-h-full h-full gap-4'>
                                             {GIFTCARDS.map(card => {
+                                                console.log(field);
+                                                
                                                 return (
                                                     <div className='bg-white sm:border-white border border-[#E1C6B3] rounded-lg aspect-video col-span-1'>
                                                         {card.name}

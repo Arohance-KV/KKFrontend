@@ -523,12 +523,15 @@ export const HomePage = () => {
                         e.preventDefault();
                         navigate("/collections");
                     }} onMouseOver={() => {
+                        // @ts-ignore
                         categoriesImageRef.current.src = "../../../../public/ring.png";
                     }}>Rings</div>
                     <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
+                        // @ts-ignore
                         categoriesImageRef.current.src = "../../../../public/earring.png";
                     }}>Earings</div>
                     <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
+                        // @ts-ignore
                         categoriesImageRef.current.src = "../../../../public/pendent.png";
                     }}>Pendants</div>
                     <div id="categories-hover-element" className="absolute bg-[#E9D6C8] z-[0] w-[350px] top-1/2 flex justify-end items-end -translate-y-1/2 overflow-hidden left-[10%] aspect-video rotate-[75deg]">

@@ -3,11 +3,11 @@ import { ICartItem, IUser, IWishListItem } from "../../../utils/interfaces";
 import { UIsideBar } from "./Solitare";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
-import { Loader, Minus, Plus, Trash2 } from "lucide-react";
-import { toast } from "sonner";
+import { Loader, Minus, Plus } from "lucide-react";
+// import { toast } from "sonner";
 import { updateCart, updateWishList } from "@/utils/utilityFunctions";
 import { Dispatch } from "@reduxjs/toolkit";
-import { ToastSuccess } from "@/utils/UtilityComponents";
+// import { ToastSuccess } from "@/utils/UtilityComponents";
 
 export const WishListPage = () => {
 
@@ -37,7 +37,7 @@ export const WishListPage = () => {
                 <div style={{
                      
                 }} className="grid grid-cols-2 overflow-y-scroll h-auto max-h-[100%] no-scrollbar gap-4 flex-1 w-full">
-                    {wishListData?.map((item : IWishListItem) => <WishListItem cartItem={{...item, quantity: 1}} cartItems={cart} dispatch={dispatch} customerData={customerData} />)}
+                    {wishListData?.map((item : IWishListItem) => <WishListItem cartItem={{...item, quantity: 1, totalPrice: 50000}} cartItems={cart} dispatch={dispatch} customerData={customerData} />)}
                 </div>
             </div>
         </div>    
@@ -85,6 +85,7 @@ const WishListItem = ( { cartItems, cartItem, dispatch, customerData } : { cartI
                                 }}>{isCartButtonLoading ? <Loader className="animate-spin w-4 h-4"/> : isInCart ? <>Remove from cart <Minus /></>: <>Add to cart <Plus /></>}</Button>
                         </div>
                         <Button disabled={isRemoveItemLoadingButton} variant={"ghost"} className="rounded-full py-3 px-1 w-0 h-0 bg-white text-[#A68A7E] border border-[#A68A7E] hover:text-white hover:bg-gray-800/20" onClick={async (e) => {
+                            e.preventDefault();
                             await updateWishList({product: cartItem?.product!, color: "white", karat: 14}, false, customerData?.wishList, dispatch, customerData?._id ? true : false, customerData?.cart, customerData?.videoCallCart);
                             setIsRemoveItemLoadingButton(false);
                             // setIsInWishList(false);

@@ -1,9 +1,9 @@
-import { ICartItem, IUser, IWishListItem } from "@/utils/interfaces";
+import { ICartItem, IUser } from "@/utils/interfaces";
 import { UIsideBar } from "./Solitare";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
-import { clearCart, updateCart, updateVideoCallCart } from "@/utils/utilityFunctions";
+import { clearCart, updateCart } from "@/utils/utilityFunctions";
 import { Loader2, Minus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -79,6 +79,7 @@ export const CartPage = () => {
                                     <Input ref={copuonRef} className="justify-self-center w-full border border-dashed" placeholder="Enter coupon code" />
                                     <Button onClick={ async (e) => {
                                         e.preventDefault();
+                                        // @ts-ignore
                                         const code = copuonRef?.current?.value!;
                                         if ( code ) {
                                             try {
@@ -225,9 +226,9 @@ export const CartPage = () => {
                                             console.log("payment failed")
                                             console.log(response)
                                         });
-                                        rzp.on("payment.success", async function (response: any) {
+                                        // rzp.on("payment.success", async function (response: any) {
 
-                                        });
+                                        // });
 
                                         e.preventDefault();
                                     } catch (error) {
