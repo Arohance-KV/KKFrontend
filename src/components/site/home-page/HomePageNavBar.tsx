@@ -71,7 +71,7 @@ export const HomePageNavBar = () => {
                     <Link to={"/giftcards"}>Giftcards</Link>
                 </div>
             </div>
-            <div id="phone-navbar" className="sm:hidden justify-between items-center flex w-full h-14 bg-red-900">
+            <div id="phone-navbar" className="sm:hidden justify-between items-center flex w-full h-14">
                 <img src="./logo.svg" alt="" className="" />
                 <Link to={"/store-locator"}>
                     <Store className="fill-[#E1C6B3] w-4 h-4 stroke-[#E1C6B3]"/>

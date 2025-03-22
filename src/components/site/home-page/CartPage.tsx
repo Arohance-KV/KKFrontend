@@ -46,6 +46,10 @@ export const CartPage = () => {
         script.async = true;
         script.onload = () => console.log("Razorpay script loaded");
         document.body.appendChild(script);
+        const cartTotal = cartItems?.reduce((total, item) => {
+            return total + item?.totalPrice;
+        }, 0);
+        setTotalPrice(cartTotal!);
     }, []);
 
     const copuonRef = useRef(null);
