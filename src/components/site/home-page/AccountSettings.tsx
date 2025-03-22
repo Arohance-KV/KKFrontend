@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { IGiftCard, IOrder, IUser } from "@/utils/interfaces";
 import { Check, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const OPTIONS = [ "Shipping Details", "Orders", "Video Calls", "Giftcards/vouchers", "Personal details" ];
 
@@ -108,8 +109,10 @@ export const AccountSettings = () => {
 
     const customerData: IUser = useSelector((state: any) => state.website.customerData);
 
-    useEffect(() => {
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        if ( customerData?._id == null) navigate("/auth"); 
     }, [ customerData ]);
 
     const [ currentOption, setCurrentOption ] = useState(4);
@@ -128,21 +131,32 @@ export const AccountSettings = () => {
                 <div className="flex-[0.4] flex flex-col gap-8 justify-center items-center h-full w-full">
                     <div id='solitare-main' className="flex-[0.5] rounded-tr-[50px] h-[45%] bg-transparent border-2 border-[#BFA6A1] w-[90%]">
                     </div>
-                    <div id='solitare-main' className="flex-[0.5] rounded-tr-[50px] h-[45%] bg-[#E1C6B3] w-[90%]">
-                        <div>
-                            <p>
+                    <div id='solitare-main' className="flex-[0.5] rounded-tr-[50px] h-[45%] text-white flex flex-col justify-evenly pl-8 bg-[#E1C6B3] w-[90%]">
+
+                            <p onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentOption(0);
+                            }}>
                                 Shipping details
                             </p>
-                            <p>
+                            <p onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentOption(1);
+                            }}>
                                 Orders
                             </p>
-                            <p>
+                            <p onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentOption(2);
+                            }}>
                                 Video calls
                             </p>
-                            <p>
+                            <p onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentOption(3);
+                            }}>
                                 Giftcards/vouchers
                             </p>
-                        </div>
                     </div>
                 </div>
                 <div className="flex-[0.6] h-full w-full inria-serif-regular relative flex justify-end flex-col">
@@ -158,7 +172,7 @@ export const AccountSettings = () => {
                             {OPTIONS[currentOption] == "Shipping Details" && <div className="h-full">
                                 <Form {...shippingAddressFrom}>
                                     <form className="flex-1 inria-serif-regular h-full text-white w-full p-[5%]" onSubmit={() => {}}>
-                                        <div className="flex-1 ">
+                                        <div className="flex-1 bg-pink-600 flex flex-col gap-6 ">
                                             <FormField
                                                 control={shippingAddressFrom.control}
                                                 name="city"
@@ -256,7 +270,7 @@ export const AccountSettings = () => {
                             </div>}
                             {OPTIONS[currentOption] == "Orders" && <div className="overflow-y-scroll flex flex-col gap-4 h-full w-full">
                                 {/* {customerData?.orders?.map(order => ( */}
-                                {orders?.map(order => (
+                                {customerData?.orders?.map(order => (
                                     <div className="justify-between text-[#BFA6A1] p-[5%] rounded-md border border-[#BFA6A1] bg-white flex m-[10px]">
                                         {/* {order?.total} */}
                                         <div className="bg-white flex flex-col gap-4">
@@ -279,7 +293,7 @@ export const AccountSettings = () => {
                                 ))}
                             </div>}
                             {OPTIONS[currentOption] == "Video Calls" && <div className="max-h-full overflow-y-scroll">
-                                {videoCalls?.map((videoCall) => (
+                                {customerData?.videoCalls?.map((videoCall) => (
                                     <div className="justify-between text-[#BFA6A1] p-[5%] rounded-md border border-[#BFA6A1] bg-white flex m-[10px]">
                                         {/* {order?.total} */}
                                         <div className="bg-white flex flex-col gap-4">
@@ -337,9 +351,9 @@ export const AccountSettings = () => {
                                     <div className="overflow-y-scroll w-full h-[calc(100%-66px)]"></div>
                                 </div>
                             </div>}
-                            {OPTIONS[currentOption] == "Personal details" && <div className="bg-blue-900 h-full">
+                            {OPTIONS[currentOption] == "Personal details" && <div className="h-full">
                                 <Form {...shippingAddressFrom}>
-                                    <form className="bg-amber-600 inria-serif-regular justify-between h-full text-white w-full p-[5%]" onSubmit={() => {}}>
+                                    <form className="inria-serif-regular justify-between h-full text-white w-full p-[5%]" onSubmit={() => {}}>
                                         <div className="flex flex-col justify-evenly h-full overflow-y-scroll">
                                             <FormField
                                                 control={shippingAddressFrom.control}

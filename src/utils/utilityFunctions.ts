@@ -149,7 +149,7 @@ export const clearCart = async ( dispatch: Dispatch<UnknownAction>, isUserPresen
 
     if ( !isUserPresent ) {
         console.log(newCart);
-        localStorage.setItem("videoCallCart", JSON.stringify([]));
+        localStorage.setItem("cart", JSON.stringify([]));
         dispatch(setCustomerData({cart : []}));
         return true;
     }
@@ -158,7 +158,7 @@ export const clearCart = async ( dispatch: Dispatch<UnknownAction>, isUserPresen
 
     try {
         // @ts-ignore
-        const response = await fetch(`http://localhost:${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/update-user-video-call-cart`, {
+        const response = await fetch(`http://localhost:${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/update-user-cart`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

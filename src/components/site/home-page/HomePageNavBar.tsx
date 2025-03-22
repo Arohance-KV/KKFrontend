@@ -31,10 +31,10 @@ export const HomePageNavBar = () => {
                     <img src="../../../../public/logo.svg" className="absolute left-1/2 -translate-x-1/2" />
                     <div className="flex-1"></div>
                     <div className="flex-[0.4] gap-[3%] flex justify-center items-center">
-                        <div className="relative w-full">
+                        {/* <div className="relative w-full">
                             <Input type="text" placeholder="Search" className="pl-6 h-8 border-[#A68A7E] border-2 bg-transparent text-[#A68A7E] placeholder:text-[#A68A7E]" />
                             <Search className="absolute top-1/2 left-2 -translate-y-1/2 w-3 h-3 stroke-[#A68A7E] stroke-2"/>
-                        </div>
+                        </div> */}
                         <Link to={"/video-cart"}>
                             <Button className="rounded-full m-0 px-3 py-4 relative" variant={"ghost"}>
                                 <Video className="fill-[#A68A7E] stroke-[#A68A7E] w-10 h-10"/>

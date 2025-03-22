@@ -150,16 +150,14 @@ const formSchema = z.object({
 export const UIsideBar = ({ side } : { side : "left" | "right" }) => {
     return (
         <>
-            <div className={cn('w-[50px] -top-[5%] absolute bottom-0 bg-[#BFA6A173] rounded-tr-full z-[5]', side == "left" ? "left-0 " : "right-0 -scale-x-[1]")} />
-            <div className={cn('w-[calc(0.75*50px)] -top-[5%] bottom-0 absolute bg-[#BFA6A1A6] rounded-tr-full z-[10]', side == "left" ? "left-0" : "right-0 -scale-x-[1]")} />
-            <div className={cn('w-[calc(0.5*50px)] -top-[5%] bottom-0 absolute bg-[#BFA6A1] rounded-tr-full z-[15]', side == "left" ? "left-0" : "right-0 -scale-x-[1]")} />
+            <div className={cn('w-[50px] sm:block hidden -top-[5%] absolute bottom-0 bg-[#BFA6A173] rounded-tr-full z-[5]', side == "left" ? "left-0 " : "right-0 -scale-x-[1]")} />
+            <div className={cn('w-[calc(0.75*50px)] sm:block hidden -top-[5%] bottom-0 absolute bg-[#BFA6A1A6] rounded-tr-full z-[10]', side == "left" ? "left-0" : "right-0 -scale-x-[1]")} />
+            <div className={cn('w-[calc(0.5*50px)] -top-[5%] bottom-0 sm:block hidden absolute bg-[#BFA6A1] rounded-tr-full z-[15]', side == "left" ? "left-0" : "right-0 -scale-x-[1]")} />
         </>
     );
 }
 
 export const GiftCards = () => {
-
-    const [showNoOfDiamonds, setShowNoOfDiamonds] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -173,17 +171,17 @@ export const GiftCards = () => {
     };
 
     return (
-        <div className='w-full relative pb-28'>
+        <div className='w-full relative pb-28 sm:text-white!'>
             <UIsideBar side="left"/>
             <UIsideBar side="right"/>
-            <div className="bg-[#E1C6B3] mt-56 gap-4 flex flex-col items-center w-[80%] justify-self-center rounded-tr-[100px] aspect-video">
-                <div className="w-full mt-14 text-center text-white">
+            <div className="sm:bg-[#E1C6B3] sm:mt-56 mt-14 gap-4 flex flex-col items-center w-full sm:w-[80%] justify-self-center rounded-tr-[100px] aspect-video">
+                <div className="w-full mt-14 text-center sm:text-white text-[#E1C6B3]">
                     <p className="inria-serif-regular text-3xl">
                         Gift cards                   
                     </p>
                 </div>
                 <Form {...form}>
-                    <form className="flex-1 inria-serif-regular gap-8 text-white w-full p-[5%] flex" onSubmit={form.handleSubmit(onSubmit)}>
+                    <form className="flex-1 inria-serif-regular gap-8 sm:text-white text-[#E1C6B3] w-full p-[5%] flex-col sm:flex-row flex" onSubmit={form.handleSubmit(onSubmit)}>
                         <div className="flex-[0.75]">
                             <FormField
                                 control={form.control}
@@ -196,83 +194,19 @@ export const GiftCards = () => {
                                         <div className='grid grid-cols-2 max-h-full h-full gap-4'>
                                             {GIFTCARDS.map(card => {
                                                 return (
-                                                    <div className='bg-white rounded-lg col-span-1'>
+                                                    <div className='bg-white sm:border-white border border-[#E1C6B3] rounded-lg aspect-video col-span-1'>
                                                         {card.name}
                                                     </div>
                                                 );
                                             })}
                                         </div>
-                                        <div className='flex justify-center items-center'>
-                                            <Button className='bg-transparent border justify-self-center self-center border-white'>
-                                                Preview
-                                            </Button>
-                                        </div>
                                     </div>
                                     </FormControl>
-                                    <FormMessage className="hidden" />
+                                    <FormMessage className="" />
                                 </FormItem>
                                 )}
                             />
                         </div>
-                        {/* <div className="col-span-2 row-span-1 bg-red-500">
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem className='w-full h-1/2 flex flex-col'>
-                                        <FormControl className='w-full h-full'>
-                                            <div className='grid grid-cols-4 gap-4 items-center'>
-                                                <p className='col-span-1'>Email Address</p>
-                                                <Input {...field} className='col-span-3' placeholder="" type="email" />
-                                            </div>
-                                        </FormControl>
-                                        <FormMessage className="hidden" />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="additionalRequirements"
-                                render={({ field }) => (
-                                    <FormItem className="gap-4 space-y-0 items-center grid h-1/2 w-full grid-cols-4">
-                                    <FormLabel className="col-span-1">Any Additional requests?</FormLabel>
-                                    <FormControl className='col-span-3'>
-                                        <Textarea
-                                            className="min-h-[73px] resize-none"
-                                            placeholder="Type any additional details here."
-                                        {...field}
-                                        />
-                                    </FormControl>
-                                    <FormDescription />
-                                    <FormMessage className="hidden" />
-                                    </FormItem>
-                                )}
-                            />
-                        </div> */}
-                        {/* <div className="col-span-1 row-span-1 bg-emerald-500">
-                            <FormField
-                                control={form.control}
-                                name="phoneNo"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-col justify-center h-1/2 items-center w-full">
-                                        <FormControl>
-                                            <div
-                                                id="gold-weight"
-                                                className="grid grid-cols-4 w-full gap-4 justify-center items-center"
-                                            >
-                                            <p className='col-span-1 flex justify-center items-center'>Phone number :</p>
-                                            <Input {...field} type="number" className="no-spinner col-span-3" />
-                                            </div>
-                                        </FormControl>
-                                        <FormMessage className="hidden" className='flex justify-center items-center self-center justify-self-center' />
-                                        <FormDescription />
-                                    </FormItem>
-                                )}
-                            />
-                            <div className='h-1/2 w-full relative'>
-                                <Button className='bg-transparent absolute hover:text-[#E1C6B3] px-[20%] hover:bg-white right-0 bottom-0 border-white text-white border'>Request a quote</Button>
-                            </div>
-                        </div> */}
                         <div className="flex-1 col-start-3 grid grid-rows-5 row-start-1 col-span-1 row-span-2">
                             <FormField
                                 control={form.control}
@@ -285,29 +219,11 @@ export const GiftCards = () => {
                                         className="grid grid-cols-4 w-full  gap-4"
                                     >
                                         <p className='col-span-1 flex items-center'>Amount :</p>
-                                        <Input {...field} placeholder="" className='col-span-3' type="number" />
-                                        {/* <RadioGroup
-                                            onValueChange={(value) => field.onChange(value)}
-                                            {...field}
-                                            className="col-span-3 text-[#E1C6B3] flex justify-between items-center"
-                                        >
-                                        <Label className="flex rounded-md hover:cursor-pointer h-full py-4 px-2 bg-white justify-center items-center gap-2">
-                                            <RadioGroupItem value={Colour.D} id="r1" />
-                                            <Label htmlFor="r1">D</Label>
-                                        </Label>
-                                        <Label className="flex justify-center hover:cursor-pointer items-center gap-2 rounded-md h-full py-4 px-2 bg-white">
-                                            <RadioGroupItem value={Colour.E} id="r2" />
-                                            <Label htmlFor="r2">E</Label>
-                                        </Label>
-                                        <Label className="flex justify-center hover:cursor-pointer items-center gap-2 rounded-md h-full py-4 px-2 bg-white">
-                                            <RadioGroupItem value={Colour.F} id="r3" />
-                                            <Label htmlFor="r3">F</Label>
-                                        </Label>
-                                        </RadioGroup> */}
+                                        <Input {...field} placeholder="" className='col-span-3 sm:border-white border-[#E1C6B3]' type="number" />
                                     </div>
                                     </FormControl>
                                     <FormDescription />
-                                    <FormMessage className="hidden" />
+                                    <FormMessage className="" />
                                 </FormItem>
                                 )}
                             />
@@ -323,28 +239,10 @@ export const GiftCards = () => {
                                     >
                                         <p className='col-span-1 flex items-center'>Name :</p>
                                         <Input {...field} placeholder="" className='col-span-3' type="text" />
-                                        {/* <RadioGroup
-                                            onValueChange={(value) => field.onChange(value)}
-                                            {...field}
-                                            className="col-span-3 text-[#E1C6B3] flex justify-between items-center"
-                                        >
-                                        <Label className="flex rounded-md hover:cursor-pointer h-full py-4 px-2 bg-white justify-center items-center gap-2">
-                                            <RadioGroupItem value={Colour.D} id="r1" />
-                                            <Label htmlFor="r1">D</Label>
-                                        </Label>
-                                        <Label className="flex justify-center hover:cursor-pointer items-center gap-2 rounded-md h-full py-4 px-2 bg-white">
-                                            <RadioGroupItem value={Colour.E} id="r2" />
-                                            <Label htmlFor="r2">E</Label>
-                                        </Label>
-                                        <Label className="flex justify-center hover:cursor-pointer items-center gap-2 rounded-md h-full py-4 px-2 bg-white">
-                                            <RadioGroupItem value={Colour.F} id="r3" />
-                                            <Label htmlFor="r3">F</Label>
-                                        </Label>
-                                        </RadioGroup> */}
                                     </div>
                                     </FormControl>
                                     <FormDescription />
-                                    <FormMessage className="hidden" />
+                                    <FormMessage className="" />
                                 </FormItem>
                                 )}
                             />
@@ -360,24 +258,6 @@ export const GiftCards = () => {
                                     >
                                         <p className='col-span-1 flex items-center'>Phone no :</p>
                                         <Input {...field} placeholder="" className='col-span-3' type="number" />
-                                        {/* <RadioGroup
-                                            onValueChange={(value) => field.onChange(value)}
-                                            {...field}
-                                            className="col-span-3 text-[#E1C6B3] flex justify-between items-center"
-                                        >
-                                        <Label className="flex rounded-md hover:cursor-pointer h-full py-4 px-2 bg-white justify-center items-center gap-2">
-                                            <RadioGroupItem value={Colour.D} id="r1" />
-                                            <Label htmlFor="r1">D</Label>
-                                        </Label>
-                                        <Label className="flex justify-center hover:cursor-pointer items-center gap-2 rounded-md h-full py-4 px-2 bg-white">
-                                            <RadioGroupItem value={Colour.E} id="r2" />
-                                            <Label htmlFor="r2">E</Label>
-                                        </Label>
-                                        <Label className="flex justify-center hover:cursor-pointer items-center gap-2 rounded-md h-full py-4 px-2 bg-white">
-                                            <RadioGroupItem value={Colour.F} id="r3" />
-                                            <Label htmlFor="r3">F</Label>
-                                        </Label>
-                                        </RadioGroup> */}
                                     </div>
                                     </FormControl>
                                     <FormDescription />
@@ -422,7 +302,7 @@ export const GiftCards = () => {
                                 )}
                             />
                             <div className='mt-14 flex justify-end items-center'>
-                                <Button type='submit' className='bg-transparent border border-white rounded-md'>
+                                <Button type='submit' className='bg-transparent border sm:border-white border-[#E1C6B3] text-[#E1C6B3] sm:text-white rounded-md'>
                                     Proceed to pay
                                 </Button>
                             </div>

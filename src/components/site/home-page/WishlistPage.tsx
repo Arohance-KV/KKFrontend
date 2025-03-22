@@ -28,7 +28,7 @@ export const WishListPage = () => {
         <div className='w-full relative pb-14'>
             <UIsideBar side="left"/>
             <UIsideBar side="right"/>
-            <div id='solitare-main' className="sm:bg-[#E1C6B3] px-8 opacity-0 mt-56 gap-10 flex flex-col items-center sm:w-[80%] w-full justify-self-center rounded-tr-[100px] aspect-video">
+            <div id='solitare-main' className="sm:bg-[#E1C6B3] px-8 opacity-0 sm:mt-56 mt-14 gap-10 flex flex-col items-center sm:w-[80%] w-full justify-self-center rounded-tr-[100px] aspect-video">
                 <div className="w-full sm:mt-14 text-center text-white ">
                     <p className="inria-serif-regular text-[#E1C6B3] sm:text-white sm:text-6xl">
                         Wish List                    
@@ -56,28 +56,28 @@ const WishListItem = ( { cartItems, cartItem, dispatch, customerData } : { cartI
 
     return ( 
         // <div className="">
-                <div className="flex col-span-1 h-28 gap-4 ">
+                <div className="flex col-span-1 sm:h-28  gap-4 ">
                     <img src={cartItem?.product?.imageUrl?.[0]?.url} className="border border-[#A68A7E] rounded-md bg-white h-full aspect-square object-cover flex-[0.25]"/>
                     {/* <img src={""} className="border border-[#A68A7E] rounded-md bg-white h-full w-auto object-cover flex-[0.25]"/> */}
                     <div className="flex-[0.75] h-full text-[#A68A7E] p-4 rounded-md  border flex border-[#A68A7E] bg-white">
-                        <div className="flex justify-evenly flex-col flex-1">
+                        <div className="flex justify-evenly flex-col text-[8px] sm:text-[16px] flex-1">
                             <p>Name: {cartItem?.product?.name}</p>
                             <p>Code: {cartItem?.product?.code}</p>
                         </div>
-                        <div className="flex-col flex justify-evenly flex-1">
+                        <div className="flex-col flex justify-evenly sm:text-[16px] text-[8px] flex-1">
                             <p>Price: {cartItem?.product?.price}</p>
-                            <Button className="bg-white text-[#A68A7E] border border-[#A68A7E] hover:text-white hover:bg-gray-800/20" onClick={ async (e) => {
+                            <Button className="bg-white sm:flex hidden justify-center items-center text-[#A68A7E] border  border-[#A68A7E] hover:text-white hover:bg-gray-800/20" onClick={ async (e) => {
                                 setIsCartButtonLoading(true);
                                 e.preventDefault();
                                 if( isInCart )
                                     {
-                                        await updateCart({ product: cartItem?.product!, quantity: 1, color: "white", karat: 14 }, false, false, cartItems, dispatch, customerData?._id ? true : false, customerData?.wishList, customerData?.videoCallCart);
+                                        await updateCart({ product: cartItem?.product!, quantity: 1, color: "white", karat: 14, totalPrice: 0 }, false, false, cartItems, dispatch, customerData?._id ? true : false, customerData?.wishList, customerData?.videoCallCart);
                                         setIsCartButtonLoading(false)
                                         // setIsInCart(false);
                                         return; 
                                         // toast.success("Product deleted from cart successfully!", { className: "font-[quicksand]", icon: <Trash2 className="w-4 h-4 stroke-red-500" /> });
                                     }
-                                    await updateCart({ product: cartItem?.product!, quantity: 1, color: "white", karat: 14 }, true, false, cartItems, dispatch, customerData?._id ? true : false, customerData?.wishList, customerData?.videoCallCart);
+                                    await updateCart({ product: cartItem?.product!, quantity: 1, color: "white", karat: 14, totalPrice: 50 }, true, false, cartItems, dispatch, customerData?._id ? true : false, customerData?.wishList, customerData?.videoCallCart);
                                     setIsCartButtonLoading(false);
                                     // setIsInCart(true);
                                     return

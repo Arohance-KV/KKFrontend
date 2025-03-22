@@ -41,7 +41,7 @@ export interface IProduct {
     noOfSolitares: number,
     noOfMultiDiamonds: number,
     multiDiamondWeight: number,
-    totalKarats: number,
+    totalKarats: number[] ,
     gender: "male" | "female" | "neutral",
     goldColor: string,
     shapeOfSolitare: string,

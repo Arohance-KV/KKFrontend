@@ -68,10 +68,10 @@ export const Collections = () => {
                         </div>    
                     </p>
                     <div className="flex items-center gap-4 justify-self-end">
-                        <div className="relative w-full">
+                        {/* <div className="relative w-full">
                             <Input type="text" placeholder="Search" className="pl-6 h-8 border-[#A68A7E] border-2 bg-transparent text-[#A68A7E] placeholder:text-[#A68A7E]" />
                             <Search className="absolute top-1/2 left-2 -translate-y-1/2 w-3 h-3 stroke-[#A68A7E] stroke-2"/>
-                        </div>
+                        </div> */}
                         <div className="relative">
                             <Button className="rounded-full m-0 px-3 py-4" variant={"ghost"} onClick={() => {
                                 setShowSortOptions(!showSortOptions);
@@ -101,11 +101,11 @@ export const Collections = () => {
                             )}
                         </div>
                         <div className="relative">
-                            <Button className="rounded-full m-0 px-3 py-4" variant={"ghost"} onClick={() => {
+                            {/* <Button className="rounded-full m-0 px-3 py-4" variant={"ghost"} onClick={() => {
                                 setShowFilter(!showFilter);
                             }}>
                                 <Filter className="fill-[#A68A7E] stroke-[#A68A7E] w-10 h-10"/>
-                            </Button>
+                            </Button> */}
                             {/* {showFilter && (
                                 <div className="min-w-14 absolute top-[150%] right-0 bg-gray-600/50">hello</div>
                             )} */}

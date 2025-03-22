@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { clearCart, updateCart, updateVideoCallCart } from "@/utils/utilityFunctions";
-import { Minus, Trash2 } from "lucide-react";
+import { Loader2, Minus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
@@ -25,16 +25,18 @@ export const CartPage = () => {
     useEffect(() => {
         setCartItems(customerData?.cart);
         const cartTotal = cartItems?.reduce((total, item) => {
-            return total + item?.product?.price * item?.quantity;
+            return total + item?.totalPrice;
         }, 0);
-        console.log(cartTotal)
-        // setTotalPrice(cartTotal!);
+        console.log(`Cart Total : ${cartTotal}`);
+        console.log(cartItems);
+        setTotalPrice(cartTotal!);
+        console.log(totalPrice)
     }, [ customerData ]);
 
 
 
 
-    const [ isOrderPlacing, setIsOrderPlacing ] = useState(false);
+    // const [ isOrderPlacing, setIsOrderPlacing ] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -53,12 +55,12 @@ export const CartPage = () => {
         <div className='w-full playfair-display! relative pb-14'>
             <UIsideBar side="left"/>
             <UIsideBar side="right"/>
-            <div id='solitare-main' className="bg-[#E1C6B3] opacity-0 mt-56 gap-4 flex flex-col items-center w-[80%] justify-self-center rounded-tr-[100px]  overflow-y-scroll no-scrollbar h-screen">
+            <div id='solitare-main' className="sm:bg-[#E1C6B3] opacity-0 sm:mt-56 gap-4 flex flex-col items-center sm:w-[80%] w-full justify-self-center rounded-tr-[100px]  overflow-y-scroll no-scrollbar h-screen">
                 <div className="w-full mt-14 text-center  flex flex-col gap-8 h-full text-white ">
                     <p className="inria-serif-regular text-6xl">
                         Cart                    
                     </p>
-                    <div className="w-[90%] max-h-full gap-4 h-full mx-[5%] pb-8 flex">
+                    <div className="w-[90%] max-h-full gap-4 h-full mx-[5%] pb-8 flex sm:flex-row flex-col">
                         <div className="flex-[0.6]  flex gap-4 overflow-y-scroll no-scrollbar flex-col">
                             {cartItems?.map((cartItem: ICartItem) => <CartItem customerData={customerData} dispatch={dispatch} cartItem={cartItem} cartItems={cartItems} />)}
                         </div>
@@ -66,7 +68,7 @@ export const CartPage = () => {
                             <p className="p-4 flex justify-start text-xl">Order summary</p>
                             <div className="flex justify-between p-4 flex-1 ">
                                 <p>Total items : {cartItems?.reduce((total, item) => {
-                                    return  + item?.quantity;
+                                    return total + item?.quantity;
                                 }, 0)}</p>
                                 <p>Price : {cartItems?.reduce((total, item) => {
                                     return total + item?.product?.price * item?.quantity;
@@ -98,8 +100,6 @@ export const CartPage = () => {
                                                 const data = await response.json();
                                                 console.log(data.data);
 
-
-                                                
                                                 // setProductData(data.data)
                                             } catch (error) {
                                                 console.log(error);
@@ -116,8 +116,10 @@ export const CartPage = () => {
                                         
                                     }} variant={"ghost"}>Apply</Button>
                                 </div>
-                                <Button disabled={cartItems?.length! <= 0} className="text-white bg-[#E1C6B3] w-[80%] self-center my-4 hover:bg-[#A68A7E] hover:text-white" onClick={ async (e) => {
+                                <Button disabled={cartItems?.length! <= 0 || isPlaceOrderButtonLoading} className="text-white bg-[#E1C6B3] w-[80%] self-center my-4 hover:bg-[#A68A7E] hover:text-white" onClick={ async (e) => {
                                     e.preventDefault();
+                                    console.log(totalPrice);
+                                    setIsPlaceOrderButtonLoading(true);
                                     try {
                                         // @ts-ignore
                                         const response = await fetch(`http://localhost:${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}payment/create-an-order/`, {
@@ -126,7 +128,7 @@ export const CartPage = () => {
                                                 "Content-Type": "application/json",
                                             },
                                             body: JSON.stringify({ options: {
-                                                amount: (50000 * 100),
+                                                amount: (totalPrice * 100),
                                                 currency: "INR",
                                             }}),
                                             credentials: "include"
@@ -141,7 +143,7 @@ export const CartPage = () => {
                                         var options = {
                                             "key_id": import.meta.env.VITE_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
                                             // "key_id": "rzp_test_2KRjU8skvbLEYt", // Enter the Key ID generated from the Dashboard
-                                            "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                                            "amount": (totalPrice * 100), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                                             "currency": "INR",
                                             "name": "Kultivated karats", //your business name
                                             "description": "Test Transaction",
@@ -149,16 +151,17 @@ export const CartPage = () => {
                                             "order_id": data?.data?.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                                             "handler": async function (res : any){
                                                 try {
-                                                    
+                                                    console.log(res);
                                                     const response = await fetch(`http://localhost:${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}payment/order/validate`, {
                                                         method: "POST",
                                                         headers: {
                                                             "Content-Type": "application/json",
                                                         },
-                                                        body: JSON.stringify({ options: {
-                                                            amount: (50000 * 100),
-                                                            currency: "INR",
-                                                        }}),
+                                                        body: JSON.stringify({ 
+                                                            razorpay_order_id: res.razorpay_order_id,
+                                                            razorpay_payment_id: res.razorpay_payment_id, 
+                                                            razorpay_signature: res.razorpay_signature,
+                                                        }),
                                                         credentials: "include"
                                                     });
                                                     // console.log(response);
@@ -170,21 +173,47 @@ export const CartPage = () => {
                                                     const data = await response.json();
                                                     console.log(data, response);
 
-                                                    await clearCart(dispatch, customerData?._id ? true : false);
                                                     console.log(response);
+                                                    const orderResponse = await fetch(`http://localhost:${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}orders/create-an-order`, {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "Content-Type": "application/json",
+                                                        },
+                                                        body: JSON.stringify({ 
+                                                            order: {
+                                                                orderId: Math.random() * 1000000 + 1,
+                                                                customerId: customerData?._id,
+                                                                total: totalPrice || 0,
+                                                                deliveryAddress: customerData?.address,
+                                                                orderStatus: "Pending",
+                                                                cart: customerData?.cart,
+                                                            }
+                                                        }),
+                                                        credentials: "include"
+                                                    });
+                                                    // console.log(response);
+                                                    
+                                                    if (!orderResponse.ok) throw new Error("HTTP error! status: "+response.status+", "+response.statusText);
+                                                    
+                                                    console.log(orderResponse);
+                                                    
+                                                    const orderData = await orderResponse.json();
+                                                    console.log(orderData, orderResponse);
+                                                    
+                                                    await clearCart(dispatch, customerData?._id ? true : false);
                                                     navigate("/payment-success");
                                                 } catch (error) {
                                                     console.log(error);
                                                 }
                                             },
                                             "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
-                                                "name": "Gaurav Kumar", //your customer's name
-                                                "email": "gaurav.kumar@example.com", 
-                                                "contact": "9000090000"  //Provide the customer's phone number for better conversion rates 
+                                                "name": `${customerData?.firstName} ${customerData?.lastName}`, //your customer's name
+                                                "email": `${customerData?.email}`, 
+                                                "contact": `${customerData?.phoneNumber || "0000000000"}`  //Provide the customer's phone number for better conversion rates 
                                             },
-                                            "notes": {
-                                                "address": "Razorpay Corporate Office"
-                                            },
+                                            // "notes": {
+                                            //     "address": "Razorpay Corporate Office"
+                                            // },
                                             "theme": {
                                                 "color": "#BFA6A1"
                                             }
@@ -203,8 +232,10 @@ export const CartPage = () => {
                                         e.preventDefault();
                                     } catch (error) {
                                         console.log(error);
+                                    } finally {
+                                        setIsPlaceOrderButtonLoading(false);
                                     }
-                                }}>Place order</Button>
+                                }}>{isPlaceOrderButtonLoading ? <Loader2 className="animate-spin"/> : "Place order"}</Button>
                             </div>
                         </div>
                     </div>
@@ -220,7 +251,7 @@ const CartItem = ({ cartItem, cartItems, dispatch, customerData } : { cartItem: 
 
     return (    
         <div className="w-full relative flex gap-4">
-            <img src={cartItem?.product?.imageUrl[0]?.url} className="h-32 border-2 border-[#BFA6A1] aspect-video object-cover rounded-md" alt="" />
+            <img src={cartItem?.product?.imageUrl[0]?.url} className="sm:h-32 h-20 border-2 border-[#BFA6A1] aspect-square sm:aspect-video object-cover rounded-md" alt="" />
             <div className=" flex-1 bg-white border-2 border-[#BFA6A1] px-8 flex rounded-md text-[#A68A7E] inria-serif-regular">
                 <div className="flex-1 flex flex-col justify-around items-start">
                     <p>Name: {cartItem?.product?.name}</p>

@@ -327,8 +327,8 @@ export const HomePage = () => {
                     <Mouse className="stroke-[#E1C6B3] w-10 h-10"/>
                 </div>
             </section>
-            <section id="about-us-section" className="flex bg-blue-600 sm:mt-14 gap-4 sm:gap-14 items-center h-auto sm:self-end flex-col sm:flex-row mb-10 w-[85%] sm:justify-self-end justify-self-center self-center justify-between">
-                <div className="italic sm:hidden p-4 sm:text-2xl text-sm bg-red-500 text-[#BFA6A1] flex justify-center items-center">
+            <section id="about-us-section" className="flex sm:mt-14 gap-4 sm:gap-14 items-center h-auto sm:self-end flex-col sm:flex-row mb-10 w-[85%] sm:justify-self-end justify-self-center self-center justify-between">
+                <div className="italic sm:hidden p-4 sm:text-2xl text-sm  text-[#BFA6A1] flex justify-center items-center">
                     Лорем ипсум долор сит амет, пер цлита поссит ех,
                 </div>
                 <Button onClick={() => navigate("/about")} className="bg-[#BFA6A1] mb-8 text-white px-4 rounded-none sm:hidden block">About us</Button>
@@ -361,7 +361,7 @@ export const HomePage = () => {
                     </div>
                 </div>
             </section>
-            <section id="about-us-section-2" className="h-screen hidden  w-full sm:flex justify-center items-center snap-start">
+            <section id="about-us-section-2" className="h-screen w-full sm:flex justify-center items-center snap-start">
                 <div id="about-us-banner" className="relative bg-transparent rounded-l-full w-[20%] self-center h-[300px] mt-56 mb-56 justify-self-center">
                     <div className="absolute h-[450px] w-[350px] top-[50%] flex justify-center items-center -translate-y-1/2">
                         <div id="about-us-main" className="bg-[#E1C6B3] opacity-0 relative h-full flex justify-center items-center w-[100%] rounded-t-full rounded-b-lg border-spacing-10" style={{
@@ -369,7 +369,7 @@ export const HomePage = () => {
                             // backgroundRepeat: "no-repeat",
                             // backgroundPosition: "0"
                         }}>
-                            <img src="https://images5.alphacoders.com/433/thumb-1920-433550.jpg" className="absolute top-0 bottom-0 left-0 right-0 h-full object-cover rounded-b-2xl bg-red-600/50 rounded-[inherit]" alt="" />
+                            <img src="https://images5.alphacoders.com/433/thumb-1920-433550.jpg" className="absolute top-0 bottom-0 left-0 right-0 h-full object-cover rounded-b-2xl  rounded-[inherit]" alt="" />
                             {/* <div className="absolute bg-red-600 top-[-5%] bottom-[-5%] left-[-5%] right-[-5%] z-[-100] bg-transparent rounded-t-[inherit] rounded-b-[inherit] border border-[#BFA6A1] "></div> */}
                             <div id="border-element" className="absolute top-[0] bottom-[0] left-[0] right-[0] z-[-100] bg-transparent rounded-t-[inherit] rounded-b-[inherit] border border-[#BFA6A1] "></div>
                             <img alt="img-1" src="https://c4.wallpaperflare.com/wallpaper/758/697/261/jewelry-jewel-wallpaper-preview.jpg" id="about-us-first-image" className="bg-[#E1C6B3] object-cover absolute  translate-x-[70%] translate-y-1/3 bottom-0 right-[0%] rounded-lg h-[0px] w-[0px] z-[-10]" />
@@ -387,7 +387,7 @@ export const HomePage = () => {
                     </div>
                 </div>
             </section>
-            <section id="shop-by-budget" className="w-full hidden snap-start opacity-0 min-h-screen playfair-display relative mb-14 justify-center items-center">
+            <section id="shop-by-budget" className="w-full snap-start opacity-0 min-h-screen playfair-display relative mb-14 justify-center items-center">
                 {/* <div className="flex bg-yellow-900/50 rotate-z-[-30deg] w-[80%] justify-between overflow-x-hidden overflow-y-hidden py-10"> */}
                     <div className="w-[500px] hover:cursor-pointer absolute overflow-hidden flex justify-center items-center top-[20%] left-[10%]" style={{
                         aspectRatio: "1/cos(30deg)",
@@ -462,7 +462,7 @@ export const HomePage = () => {
 
                 {/* </div> */}
             </section>
-            <section id="collections" className="hidden self-center justify-self-center snap-start w-[80%] h-[100vh]">
+            <section id="collections" className="self-center justify-self-center snap-start w-[80%] h-[100vh]">
                 <div className="flex h-full flex-col">
                     {/* <p id="collections-home-heading" style={{
                         // clipPath: "circle(0% at center)"
@@ -503,7 +503,7 @@ export const HomePage = () => {
                     </div>
                 </div>
             </section>
-            <section id="categories" className="hidden playfair-display opacity-0 relative w-full snap-start h-[100vh] overflow-hidden flex-col" onMouseMove={( event ) => {
+            <section id="categories" className="playfair-display opacity-0 relative w-full flex items-center snap-start h-[100vh] overflow-hidden flex-col" onMouseMove={( event ) => {
                 if ( event.pageX < 465 || event.pageX > 1200 ) return;
                 if ( event.pageX < 750 )
                     elementRotate = (75 + ((event.pageX-465) / 10)); 
@@ -518,8 +518,11 @@ export const HomePage = () => {
                     rotateZ: elementRotate,
                 });
             }}>
-                <div className="gap-4 py-[5%] flex text-[#BFA6A1] text-[75px] h-[100%] justify-center w-[80%] relative self-center">
-                    <div className="flex-1 h-full cursor-pointer flex justify-center items-center z-10" onMouseOver={() => {
+                <div className="gap-4 py-[5%] flex text-[#BFA6A1] text-[75px] h-[100%] justify-center w-[80%] relative ">
+                    <div className="flex-1 h-full cursor-pointer flex justify-center items-center z-10" onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/collections");
+                    }} onMouseOver={() => {
                         categoriesImageRef.current.src = "../../../../public/ring.png";
                     }}>Rings</div>
                     <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
@@ -621,11 +624,11 @@ export const HomePage = () => {
                 </div> */}
             </section>
             {/* <section id="reels-section" className="w-[80%] hidden playfair-display h-screen snap-start items-center justify-center flex flex-col gap-12 self-center justify-self-center"> */}
-            <section id="reels-section" className="w-[80%] hidden playfair-display h-screen snap-start items-center justify-center flex-col gap-12 self-center justify-self-center">
+            <section id="reels-section" className="w-[80%] playfair-display h-screen snap-start flex-col gap-12 self-center justify-self-center">
                 <p className="text-[#BFA6A1] text-center text-8xl">
                     Shop by look
                 </p>
-                <div className="flex gap-12 justify-center playfair-display! flex-wrap">
+                <div className="flex gap-12 mt-14 justify-center playfair-display! flex-wrap">
                     {REELS_DATA.map(reel => {
                         return (
                             <>
@@ -635,13 +638,13 @@ export const HomePage = () => {
                     })}
                 </div>
             </section>
-            {/* <section id="about-section" className="sm:w-[80%] sm:h-screen overflow-x-hidden snap-start flex flex-col aspect-video justify-self-center"> */}
-            <section id="about-section" className="sm:w-[80%] sm:h-screen overflow-x-hidden snap-start hidden aspect-video justify-self-center">
+            <section id="about-section" className="sm:w-[80%] sm:h-screen overflow-x-hidden snap-start flex flex-col aspect-video justify-self-center">
+            {/* <section id="about-section" className="w-[80%] h-screen bg-pink-600 overflow-x-hidden snap-start aspect-video justify-self-center"> */}
                 <div id="about-section-first" className="flex flex-[0.45] items-center -translate-x-[1500px]">
-                    <div className="bg-[#BFA6A1] relative flex-[0.45] h-[70%] flex ">
-                        <img src="https://media.debeers.com/i/debeers/nav-bridal-bridal-sets?fmt=auto&fmt.webp.qlt=60&fmt.jp2.qlt=34&fmt.jpeg.qlt=56&$debeers-nd-medium-7-4-1024-poi$" className="w-[66%] h-[140%] object-cover bg-blue-300 absolute top-[-20%] left-[10%]" alt="" />
+                    <div className="bg-[#BFA6A1] relative flex-[0.45] h-[70%] flex">
+                        <img src="https://media.debeers.com/i/debeers/nav-bridal-bridal-sets?fmt=auto&fmt.webp.qlt=60&fmt.jp2.qlt=34&fmt.jpeg.qlt=56&$debeers-nd-medium-7-4-1024-poi$" className="w-[66%] h-[140%] bg-blue-600 object-cover absolute top-[-20%] left-[10%]" alt="" />
                     </div>
-                    <div className="flex-[0.55] playpen-sans text-[#BFA6A1]">
+                    <div className="flex-[0.55] playpen-sans text-[#8a7875]">
                         <div className=" -translate-x-[10%] text-xl w-[70%]">
                             Лорем ипсум долор сит амет, пер цлита поссит ех, ат мунере фабулас петентиум сит. Иус цу цибо саперет сцрипсерит, нец виси муциус лабитур ид. Ет хис нонумес нолуиссе дигниссим
                         </div>

@@ -181,7 +181,7 @@ export const Solitare = () => {
     };
 
     return (
-        <div className='w-full relative text-[#E1C6B3]! bg-blue-900 pb-14'>
+        <div className='w-full relative text-[#E1C6B3]! pb-14'>
             <UIsideBar side="left"/>
             <UIsideBar side="right"/>
             <div id='solitare-main' className="sm:bg-[#E1C6B3] opacity-0 sm:mt-56 mt-0 gap-4 flex flex-col items-center sm:w-[80%] w-full justify-self-center rounded-tr-[100px] sm:aspect-video">

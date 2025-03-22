@@ -21,6 +21,7 @@ import { ProductPage } from './components/site/product-page/ProductPage.tsx';
 import { WishListPage } from './components/site/home-page/WishlistPage.tsx';
 import { CartPage } from './components/site/home-page/CartPage.tsx';
 import { AccountSettings } from './components/site/home-page/AccountSettings.tsx';
+import { PaymentSuccess } from './components/site/home-page/PaymentSuccess.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +47,7 @@ const router = createBrowserRouter(
               <Route path="/cart" element={<CartPage />} />
               <Route path="/product/:productId" element={<ProductPage />} />
               <Route path="/account-details/" element={<AccountSettings />} />
+              <Route path="/payment-success/" element={<PaymentSuccess />} />
           </Route>
       </Route>
   )
