@@ -80,7 +80,7 @@ export const CartPage = () => {
                                 }, 0)}</p>
                                 <p>Price : {Math.round(totalPrice)}</p>
                             </div>
-                            <div className="w-[90%] mb-4 flex justify-between justify-self-center self-center bg-blue-600">
+                            <div className="w-[90%] mb-4 flex justify-between justify-self-center self-center">
                                 <p>+ 3% GST</p>
                                 <p>{(Math.round((totalPrice!) * (3 / 100)))}</p>
                             </div>
