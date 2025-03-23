@@ -1,6 +1,6 @@
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
-import { ICartItem, IWishListItem } from "./interfaces";
-import { setCustomerData } from "../redux/slices/websiteSlice";
+import { ICartItem, IWishListItem } from "./interfaces.ts";
+import { setCustomerData } from "../redux/slices/websiteSlice.ts";
 
 export const updateWishList = async ( wishListItem: IWishListItem, isAdd: boolean, currentWishlist: IWishListItem[], dispatch: Dispatch<UnknownAction>, isUserPresent: boolean, cart?: ICartItem[], videoCallCart?: ICartItem[] ) => {
     console.log(videoCallCart);
