@@ -28,7 +28,7 @@ export const HomePageNavBar = () => {
         <>
             <div className="sm:flex hidden w-full flex-col gap-4 bg-transparent absolute top-0 left-0 right-0 z-10">
                 <div className="min-h-[100px] flex relative px-10">
-                    <img src="../../../../public/logo.svg" className="absolute left-1/2 -translate-x-1/2" />
+                    <img src="/logo.svg" className="absolute left-1/2 -translate-x-1/2" />
                     <div className="flex-1"></div>
                     <div className="flex-[0.4] gap-[3%] flex justify-center items-center">
                         {/* <div className="relative w-full">

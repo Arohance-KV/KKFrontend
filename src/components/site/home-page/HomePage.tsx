@@ -497,18 +497,18 @@ export const HomePage = () => {
                         navigate("/collections");
                     }} onMouseOver={() => {
                         // @ts-ignore
-                        categoriesImageRef.current.src = "../../../../public/ring.png";
+                        categoriesImageRef.current.src = "/ring.png";
                     }}>Rings</div>
                     <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
                         // @ts-ignore
-                        categoriesImageRef.current.src = "../../../../public/earring.png";
+                        categoriesImageRef.current.src = "/earring.png";
                     }}>Earings</div>
                     <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
                         // @ts-ignore
-                        categoriesImageRef.current.src = "../../../../public/pendent.png";
+                        categoriesImageRef.current.src = "/pendent.png";
                     }}>Pendants</div>
                     <div id="categories-hover-element" className="absolute bg-[#E9D6C8] z-[0] w-[350px] top-1/2 flex justify-end items-end -translate-y-1/2 overflow-hidden left-[10%] aspect-video rotate-[75deg]">
-                        <img ref={categoriesImageRef} src="../../../../public/ring.png" className="-rotate-[120deg] h-auto -translate-y-[10%] w-[70%]" alt="" />
+                        <img ref={categoriesImageRef} src="/ring.png" className="-rotate-[120deg] h-auto -translate-y-[10%] w-[70%]" alt="" />
                     </div>
                 </div>
                     <Button className="hover:bg-transparent text-[#BFA6A1] absolute bottom-[5%] right-[10%] bg-transparent playpen-sans text-2xl hover:scale-110 transition-all">See more <ArrowRight /></Button>
@@ -647,7 +647,7 @@ export const HomePage = () => {
                             <img src="https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1" className="w-full h-full object-cover rounded-full" alt="" />
                         </div>
                     </div>
-                    <img src="../../../../public/double-quotes.svg" className="z-0 sm:-bottom-[22%] -bottom-[70%] scale-50 sm:scale-100 absolute sm:left-[50%] left-0 sm:-translate-x-1/2" alt="" />
+                    <img src="/double-quotes.svg" className="z-0 sm:-bottom-[22%] -bottom-[70%] scale-50 sm:scale-100 absolute sm:left-[50%] left-0 sm:-translate-x-1/2" alt="" />
                 </div>
                 <div className="flex-1 w-full sm:rounded-ee-[200px] rounded-ee-[100px] flex items-center pt-[5%] pl-[5%] bg-[#BFA6A1] z-10">
                     <div className="inria-serif-regular w-[70%] h-[100%] relative rounded-[inherit] sm:text-3xl text-lg text-white">
