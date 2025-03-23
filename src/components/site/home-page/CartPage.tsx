@@ -25,15 +25,23 @@ export const CartPage = () => {
     useEffect(() => {
         setCartItems(customerData?.cart);
         const cartTotal = cartItems?.reduce((total, item) => {
-            return total + item?.totalPrice;
+            return total + (item?.totalPrice * item?.quantity);
         }, 0);
         console.log(`Cart Total : ${cartTotal}`);
         console.log(cartItems);
         setTotalPrice(cartTotal!);
         console.log(totalPrice)
+        // const cartTotal = cartItems?.reduce((total, item) => {
+        //     return total + item?.totalPrice;
+        // }, 0);
+        const GST = (Math.round(cartTotal!) * (3 / 100));
+        setCartFinalPrice(Math.round(cartTotal!)! + GST);
+        console.log(GST, cartFinalPrice);
+        setTotalPrice(Math.round(cartTotal!)!);
     }, [ customerData ]);
 
 
+    const [ cartFinalPrice, setCartFinalPrice ]= useState(0);
 
 
     // const [ isOrderPlacing, setIsOrderPlacing ] = useState(false);
@@ -46,10 +54,6 @@ export const CartPage = () => {
         script.async = true;
         script.onload = () => console.log("Razorpay script loaded");
         document.body.appendChild(script);
-        const cartTotal = cartItems?.reduce((total, item) => {
-            return total + item?.totalPrice;
-        }, 0);
-        setTotalPrice(cartTotal!);
     }, []);
 
     const copuonRef = useRef(null);
@@ -74,9 +78,15 @@ export const CartPage = () => {
                                 <p>Total items : {cartItems?.reduce((total, item) => {
                                     return total + item?.quantity;
                                 }, 0)}</p>
-                                <p>Price : {cartItems?.reduce((total, item) => {
-                                    return total + item?.product?.price * item?.quantity;
-                                }, 0)}</p>
+                                <p>Price : {Math.round(totalPrice)}</p>
+                            </div>
+                            <div className="w-[90%] mb-4 flex justify-between justify-self-center self-center bg-blue-600">
+                                <p>+ 3% GST</p>
+                                <p>{(Math.round((totalPrice!) * (3 / 100)))}</p>
+                            </div>
+                            <div className="w-[90%] mb-4 self-center flex justify-between bg-blue-600">
+                                <p>Cart total</p>
+                                <p>{Math.round(cartFinalPrice)}</p>
                             </div>
                             <div className="flex flex-col gap-4 justify-center items-center">
                                 <div className="relative w-[80%]">
@@ -133,7 +143,7 @@ export const CartPage = () => {
                                                 "Content-Type": "application/json",
                                             },
                                             body: JSON.stringify({ options: {
-                                                amount: (totalPrice * 100),
+                                                amount: (Math.round(cartFinalPrice) * 100),
                                                 currency: "INR",
                                             }}),
                                             credentials: "include"
@@ -148,7 +158,9 @@ export const CartPage = () => {
                                         var options = {
                                             "key_id": import.meta.env.VITE_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
                                             // "key_id": "rzp_test_2KRjU8skvbLEYt", // Enter the Key ID generated from the Dashboard
-                                            "amount": (totalPrice * 100), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                                            "amount": (Math.round(cartItems?.reduce((total, item) => {
+                                                return total + item?.totalPrice * item?.quantity;
+                                            }, 0)!) * 100), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                                             "currency": "INR",
                                             "name": "Kultivated karats", //your business name
                                             "description": "Test Transaction",
@@ -263,7 +275,7 @@ const CartItem = ({ cartItem, cartItems, dispatch, customerData } : { cartItem: 
                     <p>code: {cartItem?.product?.code}</p>
                 </div>
                 <div className="flex-1 flex flex-col justify-around items-end">
-                    <p>Price: {cartItem?.product?.price * cartItem?.quantity}</p>
+                    <p>Price for 1: {Math.round(cartItem?.totalPrice)}</p>
                     <p>Quantity: {cartItem?.quantity}</p>
                 </div>
                 <Button disabled={isRemoveItemLoadingButton} variant={"ghost"} className="rounded-full py-3 px-1 w-0 h-0 ml-4 mt-4 bg-white text-[#A68A7E] border border-[#A68A7E] hover:text-white hover:bg-gray-800/20" onClick={async (e) => {

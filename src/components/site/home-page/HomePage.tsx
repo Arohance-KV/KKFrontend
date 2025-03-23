@@ -8,18 +8,19 @@ import { cn } from "@/lib/utils";
 
 const Reel = ({ reel } : { reel: {title: string, url: string, product: string }}) => {
     return (
-        <div className="bg-yellow-600 flex flex-col w-[300px] h-[450px] playfair-display rounded-xl">
+        <div className="bg-yellow-600 flex flex-col width-[calc(300*0.85)] h-[450px] playfair-display rounded-xl">
             <div className="bg-[#E1C6B3] rounded-t-[inherit] flex-[0.85]">
                     {/* <video src={reel.url}></video> */}
-                {/* <video src={reel.url} className="rounded-[inherit]" muted={true} controls={false} autoPlay={true}></video> */}
+                <video src={reel.url} className="rounded-[inherit] sm:h-[calc(0.85*450px)] min-w-full" muted={true} controls={false} autoPlay={true}></video>
             </div>
-            <div className="flex-[0.15] py-2 flex items-center gap-4 px-4 bg-gradient-to-b from-white to-[#E1C6B3] rounded-b-[inherit]">
+            {/* ToDo: change when mapped to product <div className="flex-[0.15] py-2 flex items-center gap-4 px-4 bg-gradient-to-b from-white to-[#E1C6B3] rounded-b-[inherit]"> */}
+            <div className="flex-[0.15] py-2 flex justify-center items-center gap-4 px-4 bg-gradient-to-b from-white to-[#E1C6B3] rounded-b-[inherit]">
                 <div id="reels-image" className="rounded-full bg-[#E1C6B3] h-14 aspect-square">
                     {/* <video src={reel.url}></video> */}
                 </div>
-                <div className="text-[#A68A7E]">
+                {/* <div className="text-[#A68A7E]">
                     {reel?.title}
-                </div>
+                </div> */}
             </div>
         </div>
     );
@@ -29,23 +30,23 @@ const BLOGDATA = [
     {
         _id: "id",
         blogName: "first",
-        title: "first blog",
+        title: "Natural vs Lab-grown diamonds",
         blogImageUrl: {
-            url: "https://wallpapers.com/images/high/japanese-minimalist-wallpaper-afu3p6ooyp86sphd.webp",
+            url: "/KultivatedKaratsAssets/blog-1-banner.png",
             publicId: "a",
         },
         blogContent: {
             design: "string",
             markup: "string",
-            description: "This is a blog"
+            description: ""
         },
     },
     {
         _id: "id2",
         blogName: "first",
-        title: "first blog",
+        title: "Rings",
         blogImageUrl: {
-            url: "https://wallpapershome.com/images/pages/pic_h/6473.jpg",
+            url: "/KultivatedKaratsAssets/blog-2-banner.png",
             publicId: "a",
         },
         blogContent: {
@@ -57,43 +58,15 @@ const BLOGDATA = [
     {
         _id: "id3",
         blogName: "first",
-        title: "first blog",
+        title: "2025 Jewellery trends",
         blogImageUrl: {
-            url: "https://wallpapers.com/images/high/japanese-minimalist-wallpaper-7ldurzgtpkdyz9y6.webp",
+            url: "/KultivatedKaratsAssets/blog-3-banner.png",
             publicId: "a",
         },
         blogContent: {
             design: "string",
-            markup: "string",
+            markup: "<p></p>",
             description: "Here's yet another blog"
-        },
-    },
-    {
-        _id: "id4",
-        blogName: "first",
-        title: "first blog",
-        blogImageUrl: {
-            url: "https://wallpapers.com/images/high/japanese-minimalist-wallpaper-0lyjok2etoi86d2i.webp",
-            publicId: "a",
-        },
-        blogContent: {
-            design: "string",
-            markup: "string",
-            description: "And another"
-        },
-    },
-    {
-        _id: "id5",
-        blogName: "first",
-        title: "first blog",
-        blogImageUrl: {
-            url: "https://wallpapers.com/images/high/japanese-minimalist-wallpaper-p3a9mdull9eve38t.webp",
-            publicId: "a",
-        },
-        blogContent: {
-            design: "string",
-            markup: "string",
-            description: "That's it!"
         },
     },
 ]
@@ -105,18 +78,18 @@ let elementRotate: number;
 const REELS_DATA = [
     {
         title: 'reel 1',
-        url: '/reels/1.mp4',
+        url: '/KultivatedKaratsAssets/reel-1.mp4',
         product: 'Engagement Ring'      
     },
     {
         title: 'reel 1',
         // url: 'https:',
-        url: '/reels/2.mp4',
+        url: '/KultivatedKaratsAssets/reel-2.mp4',
         product: 'Engagement Ring'      
     },
     {
         title: 'reel 1',
-        url: '/reels/3.mp4',
+        url: '/KultivatedKaratsAssets/reel-3.mp4',
         product: 'Engagement Ring'      
     },
 ];
@@ -369,11 +342,11 @@ export const HomePage = () => {
                             // backgroundRepeat: "no-repeat",
                             // backgroundPosition: "0"
                         }}>
-                            <img src="https://images5.alphacoders.com/433/thumb-1920-433550.jpg" className="absolute top-0 bottom-0 left-0 right-0 h-full object-cover rounded-b-2xl  rounded-[inherit]" alt="" />
+                            <img src="/KultivatedKaratsAssets/collage_3.png" className="absolute top-0 bottom-0 left-0 right-0 h-full object-cover rounded-b-2xl  rounded-[inherit]" alt="" />
                             {/* <div className="absolute bg-red-600 top-[-5%] bottom-[-5%] left-[-5%] right-[-5%] z-[-100] bg-transparent rounded-t-[inherit] rounded-b-[inherit] border border-[#BFA6A1] "></div> */}
                             <div id="border-element" className="absolute top-[0] bottom-[0] left-[0] right-[0] z-[-100] bg-transparent rounded-t-[inherit] rounded-b-[inherit] border border-[#BFA6A1] "></div>
-                            <img alt="img-1" src="https://c4.wallpaperflare.com/wallpaper/758/697/261/jewelry-jewel-wallpaper-preview.jpg" id="about-us-first-image" className="bg-[#E1C6B3] object-cover absolute  translate-x-[70%] translate-y-1/3 bottom-0 right-[0%] rounded-lg h-[0px] w-[0px] z-[-10]" />
-                            <img alt="img-2" src="https://c4.wallpaperflare.com/wallpaper/410/773/301/jewelry-wallpaper-preview.jpg" id="about-us-second-image" className="bg-[#E1C6B3] object-cover absolute top-[-10px] left-[0%] -translate-x-[70%] rounded-full h-[0] w-[0] z-[-10]" />
+                            <img alt="img-1" src="/KultivatedKaratsAssets/collage_1.png" id="about-us-first-image" className="bg-[#E1C6B3] object-cover absolute  translate-x-[70%] translate-y-1/3 bottom-0 right-[0%] rounded-lg h-[0px] w-[0px] z-[-10]" />
+                            <img alt="img-2" src="/KultivatedKaratsAssets/collage_2.png" id="about-us-second-image" className="bg-[#E1C6B3] object-cover absolute top-[-10px] left-[0%] -translate-x-[70%] rounded-full h-[0] w-[0] z-[-10]" />
                             <div id="about-us-line-element-1" className="border-[0.5px] opacity-0 border-[#BFA6A1] h-0 absolute bottom-[-15%] right-[100%] left-0">
                                 <div className="w-2 h-2 rounded-full bg-[#BFA6A1] absolute right-[0] top-1/2 translate-x-1/2 -translate-y-1/2"></div>
                             </div>
@@ -382,8 +355,8 @@ export const HomePage = () => {
                             </div>
                         </div>
                     </div>
-                    <div id="about-us-section-text" className="bg-transparent w-[50%] h-full libre-bodoni font-bold text-white text-center pt-14 pr-14 self-end justify-self-end">
-                        Лорем ипсум долор сит амет, пер цлита поссит ех, ат мунере фабулас петентиум сит. Иус цу цибо саперет сцрипсерит, нец виси муциус лабитур ид. Ет хис нонумес нолуиссе дигниссим
+                    <div id="about-us-section-text" className="bg-transparent w-[50%] flex justify-center items-center h-full libre-bodoni font-bold text-white text-center pr-14 self-end justify-self-end">
+                        Kultivated Karats brings you the perfect blend of tradition and innovation with our exquisite lab-grown diamond jewelry. Crafted with precision and sustainability in mind, our diamonds offer the same brilliance and elegance as natural ones while being ethically sourced. Whether it's a timeless solitaire, a statement necklace, or everyday luxury, our collection ensures beauty without compromise. Celebrate your moments with eco-friendly, conflict-free diamonds that shine forever.
                     </div>
                 </div>
             </section>
@@ -398,7 +371,7 @@ export const HomePage = () => {
                         <p className="z-10 rotate-z-[30deg] text-white text-9xl">
                             60k
                         </p>
-                        <img src="/katana.svg" className="top-0 bottom-0 hover:cursor-pointer rotate-z-[30deg] left-0 right-0 object-cover absolute" alt="" />
+                        <img src="/KultivatedKaratsAssets/shop-by-budget-1.png" className="top-0 bottom-0 hover:cursor-pointer rotate-z-[30deg] left-0 right-0 object-cover absolute" alt="" />
                     </div>
                     <div className="w-[300px] absolute hover:cursor-pointer overflow-hidden flex justify-center items-center top-[15%] left-[45%]" style={{
                         aspectRatio: "1/cos(30deg)",
@@ -409,7 +382,7 @@ export const HomePage = () => {
                         <p className="z-10 rotate-z-[30deg] text-white text-6xl">
                             30k
                         </p>
-                        <img src="/katana.svg" className="top-0 bottom-0 rotate-z-[30deg] left-0 right-0 object-cover absolute" alt="" />
+                        <img src="/KultivatedKaratsAssets/shop-by-budget-2.png" className="top-0 bottom-0 rotate-z-[30deg] left-0 right-0 object-cover absolute" alt="" />
                     </div>
                     {/* <div className="w-[250px] z-10 absolute overflow-hidden flex justify-center items-center top-[5%] left-[32%]" style={{
                         aspectRatio: "1/cos(30deg)",
@@ -431,7 +404,7 @@ export const HomePage = () => {
                         <p className="z-[50] rotate-z-[30deg] text-white text-3xl">
                             15k
                         </p>
-                        <img src="/katana.svg" className="top-0 bottom-0 rotate-z-[30deg] left-0 right-0 object-cover absolute" alt="" />
+                        <img src="/KultivatedKaratsAssets/shop-by-budget-3.png" className="top-0 bottom-0 rotate-z-[30deg] left-0 right-0 object-cover absolute" alt="" />
                     </div>
                     <div className="text-[#BFA6A1] leading-30 absolute bottom-0 right-0 -z-0 text-wrap h-auto text-8xl w-96">
                         Shop <br />by <br/>budget
@@ -483,10 +456,10 @@ export const HomePage = () => {
                     <div id="collections-text" className="flex opacity-0 justify-between gap-0 h-full flex-1">
                         <div className="flex flex-col flex-[0.33] playpen-sans h-full">
                             <p className="flex-1 text-[#BFA6A1] font-bold">
-                                Лорем ипсум долор сит амет
+                                Explore the exquisite collections by Kultivated Karats, where elegance meets perfection.
                             </p>
                             <p className="flex-1 text-[#BFA6A1] playpen-sans">
-                                Лорем ипсум долор сит амет, пер цлита поссит ех, ат мунере фабулас петентиум сит.
+                                Discover timeless jewelry crafted with brilliance, elegance, and sustainable luxury at Kultivated Karats.
                             </p>
                             <div className="flex-1">
                                 <Button className="bg-[#E9D6C8] px-10 text-white rounded-none transition-all border-2 hover:text-[#BFA6A1] hover:bg-white border-[#BFA6A1]">See more</Button>
@@ -497,7 +470,7 @@ export const HomePage = () => {
                         </div> */}
                         <div id="collections-home-banner" className="flex-[0.33] opacity-0 flex justify-center items-center">
                             <div id="carousel" className="bg-pink-300/30 aspect-video h-[80%]">
-                                
+                                <img src="/KultivatedKaratsAssets/collections-banner.png" className="w-full h-full object-cover" alt="" />
                             </div>
                         </div>
                     </div>
@@ -643,23 +616,23 @@ export const HomePage = () => {
             </section>
             <section id="about-section" className="sm:w-[80%] sm:h-screen overflow-x-hidden snap-start flex flex-col aspect-video justify-self-center">
             {/* <section id="about-section" className="w-[80%] h-screen bg-pink-600 overflow-x-hidden snap-start aspect-video justify-self-center"> */}
-                <div id="about-section-first" className="flex flex-[0.45] items-center -translate-x-[1500px]">
+                <div id="about-section-first" className="flex inria-serif-regular flex-[0.45] items-center -translate-x-[1500px]">
                     <div className="bg-[#BFA6A1] relative flex-[0.45] h-[70%] flex">
-                        <img src="https://media.debeers.com/i/debeers/nav-bridal-bridal-sets?fmt=auto&fmt.webp.qlt=60&fmt.jp2.qlt=34&fmt.jpeg.qlt=56&$debeers-nd-medium-7-4-1024-poi$" className="w-[66%] h-[140%] bg-blue-600 object-cover absolute top-[-20%] left-[10%]" alt="" />
+                        <img src="/KultivatedKaratsAssets/about-us-2.png" className="w-[66%] h-[140%] bg-blue-600 object-cover absolute top-[-20%] left-[10%]" alt="" />
                     </div>
-                    <div className="flex-[0.55] playpen-sans text-[#8a7875]">
-                        <div className=" -translate-x-[10%] text-xl w-[70%]">
-                            Лорем ипсум долор сит амет, пер цлита поссит ех, ат мунере фабулас петентиум сит. Иус цу цибо саперет сцрипсерит, нец виси муциус лабитур ид. Ет хис нонумес нолуиссе дигниссим
+                    <div className="flex-[0.55] text-[#8a7875]">
+                        <div className=" -translate-x-[10%] text-xl w-[90%]">
+                            Lab-grown diamonds capture the beauty of everlasting love—pure, radiant, and ethically crafted. Each sparkle tells a story of brilliance without compromise, a promise of sustainability and elegance. Wear a gem that shines with emotion, reflecting your values and timeless grace.
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-[0.55] translate-x-[1500px]" id="about-section-second">
                     <div className="flex-1 flex items-center justify-end">
-                        <div className="border-2 w-[95%] h-[70%] border-r-0 border-[#BFA6A1] flex  justify-center items-center px-[10%] playpen-sans text-[#BFA6A1]">
-                            Лорем ипсум долор сит амет, пер цлита поссит ех, ат мунере фабулас петентиум сит. Иус цу цибо саперет сцрипсерит, нец виси муциус лабитур ид. Ет хис нонумес нолуиссе дигниссим
+                        <div className="border-2 w-[95%] h-[70%] border-r-0 border-[#BFA6A1] flex  justify-center items-center px-[10%] inria-serif-regular text-[#BFA6A1]">
+                            Kultivated Karats has redefined luxury by blending tradition with innovation, offering exquisite lab-grown diamond jewelry that embodies purity, brilliance, and sustainability. As a leader in the industry, we craft pieces that tell stories—of love, elegance, and conscious choices. Our commitment to excellence ensures every jewel sparkles with emotion, making us a trusted name in fine jewelry.
                         </div>
                     </div>
-                    <img src="https://wallpapercave.com/wp/wp9766145.jpg" alt="" className="bg-pink-300/40 border-none object-cover h-full w-[30%]" />
+                    <img src="/KultivatedKaratsAssets/about-us-2_2.png" alt="" className="bg-pink-300/40 border-none object-cover h-full w-[30%]" />
                 </div>
             </section>
             <section id="testimonials" className="w-[80%] opacity-0 snap-start playfair-display! justify-self-center sm:h-screen flex flex-col">
@@ -670,15 +643,17 @@ export const HomePage = () => {
                         </div>
                     </div>
                     <div className="sm:flex-1 flex-[0.25] relative">
-                        <div className="sm:h-[80%] h-[100px] right-0 sm:-bottom-[20%] -bottom-[10%] z-50 absolute aspect-square rounded-full bg-[#A68A7E]"></div>
+                        <div className="sm:h-[80%] h-[100px] right-0 sm:-bottom-[20%] -bottom-[10%] z-50 absolute aspect-square rounded-full bg-[#A68A7E]">
+                            <img src="https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1" className="w-full h-full object-cover rounded-full" alt="" />
+                        </div>
                     </div>
                     <img src="../../../../public/double-quotes.svg" className="z-0 sm:-bottom-[22%] -bottom-[70%] scale-50 sm:scale-100 absolute sm:left-[50%] left-0 sm:-translate-x-1/2" alt="" />
                 </div>
                 <div className="flex-1 w-full sm:rounded-ee-[200px] rounded-ee-[100px] flex items-center pt-[5%] pl-[5%] bg-[#BFA6A1] z-10">
-                    <div className="playpen-sans w-[70%] h-[100%] relative rounded-[inherit] sm:text-3xl text-lg text-white">
-                        Лорем ипсум долор сит амет, пер цлита поссит ех, ат мунере фабулас петентиум сит. Иус цу цибо саперет хис нонумес нолуиссе дигниссим
+                    <div className="inria-serif-regular w-[70%] h-[100%] relative rounded-[inherit] sm:text-3xl text-lg text-white">
+                        I couldn’t be happier with my decision to purchase a lab-grown diamond from Kultivated Carats! From start to finish, the experience was exceptional. The website was easy to navigate, and I really appreciated the transparency about the diamond’s origin and the sustainable practices behind its creation.
                         <div className="absolute font-[montserrat] bottom-[10%] italic right-0 text-sm">
-                            Лорем ипсум долор сит амет, пер цлита поссит ех
+                            Karandeep
                         </div>
                     </div>
                 </div>

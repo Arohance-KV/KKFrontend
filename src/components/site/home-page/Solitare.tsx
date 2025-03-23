@@ -247,7 +247,7 @@ export const Solitare = () => {
                                     <FormItem className='w-full h-1/2 flex flex-col'>
                                         <FormControl className='w-full h-full'>
                                             <div className='grid grid-cols-4 sm:text-white text-[#E1C6B3]  gap-4 items-center'>
-                                                <p className='col-span-1 text-[#E1C6B3]'>Email Address</p>
+                                                <p className='col-span-1 sm:text-white text-[#E1C6B3]'>Email Address</p>
                                                 <Input {...field} className='col-span-3' placeholder="" type="email" />
                                             </div>
                                         </FormControl>

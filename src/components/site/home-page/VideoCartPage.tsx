@@ -66,7 +66,7 @@ export const VideoCartPage = () => {
                     </div> : videoCallCartData?.map((videoCartItem: ICartItem) => {
                         return (
                             // <div className="">
-                                <CartItem item={ { name: videoCartItem?.product?.name, code: videoCartItem?.product?.code, price: videoCartItem?.product?.price, product: videoCartItem?.product, cart: cart, wishList: wishList, customerData: customerData, dispatch: dispatch, currentVideoCallCart: videoCallCartData } }/>
+                                <CartItem item={ { name: videoCartItem?.product?.name, code: videoCartItem?.product?.code, price: (videoCartItem?.totalPrice * videoCartItem?.quantity), product: videoCartItem?.product, cart: cart, wishList: wishList, customerData: customerData, dispatch: dispatch, currentVideoCallCart: videoCallCartData } }/>
                             // </div>
                         );
                     })}

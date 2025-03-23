@@ -99,12 +99,12 @@ export const updateVideoCallCart = async ( cartItem: ICartItem, isAdd: boolean, 
 
     if ( isAdd )
         if ( sameItem ) 
-            newCart = [ videoCallCart.map((item: ICartItem) => item?.product?._id == cartItem?.product?._id ? { product: item.product, quantity: item.quantity + 1 } : item) ];
+            newCart = [ videoCallCart.map((item: ICartItem) => item?.product?._id == cartItem?.product?._id ? { product: item.product, quantity: item.quantity + 1, totalPrice: item?.totalPrice } : item) ];
         else 
             newCart = [ ...videoCallCart, cartItem ];
     else
         if ( sameItem ) 
-            newCart = [ videoCallCart.map((item: ICartItem) => item?.product?._id == cartItem?.product?._id ? { product: item.product, quantity: item.quantity - 1 } : item) ];
+            newCart = [ videoCallCart.map((item: ICartItem) => item?.product?._id == cartItem?.product?._id ? { product: item.product, quantity: item.quantity - 1, totalPrice: item?.totalPrice } : item) ];
         else 
             newCart = videoCallCart?.filter((item: ICartItem) => item?.product?._id !== cartItem?.product?._id);
         

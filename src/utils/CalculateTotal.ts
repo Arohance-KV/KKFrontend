@@ -15,7 +15,7 @@ const getSolRate = (value : number) => {
     return 0;
 };
 
-export const getDiamondPrice = ({ karat, netWeight, diamondWeight, solitareWeight, multiDiaWeight } : { karat: number, netWeight : number, diamondWeight?: number, solitareWeight: number, multiDiaWeight: number }) => {
+export const getDiamondPrice = ({ karat, netWeight, solitareWeight, multiDiaWeight } : { karat: number, netWeight : number, solitareWeight: number, multiDiaWeight: number }) => {
     const grossWeight = ((solitareWeight + multiDiaWeight) / 5) + netWeight;
     const GoldRate = netWeight * (karat == 14 ? goldRate14K : goldRate18K);
     const solitareRate = getSolRate(solitareWeight);
@@ -25,6 +25,6 @@ export const getDiamondPrice = ({ karat, netWeight, diamondWeight, solitareWeigh
     const makingCharges = grossWeight * 1200;
     const subTotal = GoldRate + diamondRate + makingCharges;
     const total = subTotal + (subTotal * (GST / 100));
-    console.log(grossWeight, GoldRate, solitareRate, multiDiaRate, diamondRate, makingCharges, diamondWeight, subTotal, total);
+    console.log(grossWeight, GoldRate, solitareRate, multiDiaRate, diamondRate, makingCharges, subTotal, total);
     return subTotal;
 };

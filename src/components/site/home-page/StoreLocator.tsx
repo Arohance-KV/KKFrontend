@@ -16,7 +16,7 @@ export const StoreLocator = () => {
                 <UIsideBar side="left"/>
                 <UIsideBar side="right"/>
                 <div className="bg-[#E1C6B3] sm:mt-56 mt-14  justify-self-center w-[80%] h-56 rounded-lg">
-                    
+                    <img src="/KultivatedKaratsAssets/storeLocatorBanner.png" className="h-full w-full object-cover rounded-[inherit]" alt="" />
                 </div>
                 <div className="flex w-[80%] justify-self-center sm:flex-row flex-col h-auto gap-8">
                     

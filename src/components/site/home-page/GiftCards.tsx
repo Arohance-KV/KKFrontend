@@ -13,22 +13,28 @@ import { cn } from '../../../lib/utils';
 
 const GIFTCARDS = [
     {
-        name: "diwali"
+        name: "Congratulations",
+        image: "/KultivatedKaratsAssets/congratulations-gift-card.png"
     },
     {
-        name: "valentines"
+        name: "Thank you",
+        image: "/KultivatedKaratsAssets/thank-you-gift-card.png"
     },
     {
-        name: "diwali"
+        name: "Happy Aniversary",
+        image: "/KultivatedKaratsAssets/happy-aniversary-gift-card.png"
     },
     {
-        name: "valentines"
+        name: "Happy Birthday",
+        image: "/KultivatedKaratsAssets/happy-birthday.png"
     },
     {
-        name: "diwali"
+        name: "Custom",
+        image: "/KultivatedKaratsAssets/default-gift-card.png"
     },
     {
-        name: "valentines"
+        name: "Best Wishes",
+        image: "/KultivatedKaratsAssets/best-wishes-gift-card.png"
     },
 ];
   
@@ -137,10 +143,10 @@ export const GiftCards = () => {
                                         <div className='grid grid-cols-2 max-h-full h-full gap-4'>
                                             {GIFTCARDS.map(card => {
                                                 console.log(field);
-                                                
                                                 return (
-                                                    <div className='bg-white sm:border-white border border-[#E1C6B3] rounded-lg aspect-video col-span-1'>
+                                                    <div className='bg-white text-[#E1C6B3] flex flex-col pt-2 gap-2 justify-between items-center sm:border-white border border-[#E1C6B3] rounded-lg aspect-video col-span-1'>
                                                         {card.name}
+                                                        <img src={card?.image} alt="" className='w-full h-full rounded-[inherit] self-end bg-red-600'/>
                                                     </div>
                                                 );
                                             })}
