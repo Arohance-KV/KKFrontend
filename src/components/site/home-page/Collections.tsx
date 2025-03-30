@@ -26,8 +26,8 @@ const Collection = ({ data, navigate } : { data : ICollection, navigate: Navigat
                             }}>
                                 <img src={item?.imageUrl[0]?.url} alt="" className="bg-white sm:min-w-56 object-cover aspect-square"/>
                                 <div className="sm:text-white text-[#E1C6B3] text-[4px] flex justify-between">
-                                    <p className="capitalize w-1/2 text-[8px] sm:text-sm">Name: {item.name}</p>
-                                    <p className="w-1/2 text-[8px] sm:text-sm">Base price: {item.price}</p>
+                                    {/* <p className="capitalize w-1/2 text-[8px] sm:text-sm">Name: {item.name}</p> */}
+                                    {/* <p className="w-1/2 text-[8px] sm:text-sm">Base price: {item.price}</p> */}
                                 </div>
                             </button>
                         );

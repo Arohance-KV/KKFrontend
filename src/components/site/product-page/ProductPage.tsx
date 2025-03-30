@@ -55,7 +55,7 @@ export const ProductPage = () => {
         console.log(currentWishlist?.find((item: IProduct) => item?._id === productData?._id), isInWishList, currentCart, currentWishlist);
         console.log(currentWishlist, isInWishList, isInCart, currentCart, productData, productData);
         console.log(currentWishlist, productData);
-        setPrice(getDiamondPrice({karat: 14, netWeight: productData?.netWeight, solitareWeight: productData?.solitareWeight, multiDiaWeight: productData?.multiDiamondWeight}))
+        setPrice(getDiamondPrice({karat: 14, netWeight: productData?.netWeight, solitareWeight: productData?.solitareWeight, multiDiaWeight: productData?.multiDiamondWeight}).subTotal)
     }, [ productData ]);
 
     const getProductFromId = async () => {
@@ -88,10 +88,21 @@ export const ProductPage = () => {
     // console.log(productData?.goldColor[0]?.charAt(0).toUpperCase() + productData?.goldColor[0]?.slice(1) == "White");
 
     return (
-        <section id="product-section" className="w-full relative mt-56 pb-14 min-h-screen">
+        <section id="product-section" className="w-full relative sm:mt-56 mt-14 pb-14 min-h-screen">
             <UIsideBar side="left"/>
             <UIsideBar side="right"/>
-            <div id='solitare-main' className="border-[#E1C6B3] border flex flex-col opacity-0 w-[90%] justify-self-center rounded-lg aspect-video">
+            {/* <div className="block sm:hidden">
+                <div className="bg-pink-600">
+                    <Button className="absolute top-5 left-0" variant={"ghost"} onClick={(e) => {
+                            e.preventDefault();
+                            navigate("/collections");
+                    }}><ArrowLeft className="stroke-[#E1C6B3]" /></Button>
+                    <div className="flex-1 flex justify-center items-center">
+                        <JewelryCarousel imageUrl={ productData?.imageUrl } />
+                    </div>
+                </div>
+            </div> */}
+            <div id='solitare-main' className="border-[#E1C6B3] sm:flex-row flex-col flex border flex-col opacity-0 w-[90%] justify-self-center rounded-lg aspect-video">
                 <div className="px-[5%] flex h-full">
                     <div className="relative min-h-80 flex flex-col justify-between flex-[0.55]">
                         {/* <EmblaCarousel product={productData!} /> */}
@@ -152,7 +163,7 @@ export const ProductPage = () => {
                                         Gold karats:
                                     </p>
                                     <RadioGroup id="karat-input" onValueChange={(value) => {
-                                            setPrice(getDiamondPrice({karat: Number(value), netWeight: productData?.netWeight, solitareWeight: productData?.solitareWeight, multiDiaWeight: productData?.multiDiamondWeight}))
+                                            setPrice(getDiamondPrice({karat: Number(value), netWeight: productData?.netWeight, solitareWeight: productData?.solitareWeight, multiDiaWeight: productData?.multiDiamondWeight}).subTotal)
                                             karatRef.current = Number(value);
                                     }} defaultValue={ "14" }>
                                         {/* {productData?.totalKarats?.map(karat => { */}
