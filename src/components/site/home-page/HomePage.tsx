@@ -473,6 +473,43 @@ export const HomePage = () => {
                         </div>
                     </div>
                 </section>
+                <section id="categories" className="playfair-display opacity-0 relative w-full flex items-center snap-start h-[100vh] overflow-hidden flex-col" onMouseMove={( event ) => {
+                    if ( event.pageX < 465 || event.pageX > 1200 ) return;
+                    if ( event.pageX < 750 )
+                        elementRotate = (75 + ((event.pageX-465) / 10)); 
+                    else
+                    elementRotate = (75 + ((event.pageX-465) / 10)) - (((event.pageX - 465) * 1) / 30);
+                    console.log(event.pageX, elementRotate);
+                    gsap.to("#categories-hover-element", {
+                        // translateX: event.pageX,
+                        // x: (event.pageX > 500) && (event.pageX < 1200) ? event.pageX-465 : "",
+                        x: event.pageX-465,
+                        duration: 0.5,
+                        rotateZ: elementRotate,
+                    });
+                }}>
+                    <div className="gap-4 py-[5%] flex text-[#BFA6A1] text-[75px] h-[100%] justify-center w-[80%] relative ">
+                        <div className="flex-1 h-full cursor-pointer flex justify-center items-center z-10" onClick={(e) => {
+                            e.preventDefault();
+                            navigate("/collections");
+                        }} onMouseOver={() => {
+                            // @ts-ignore
+                            categoriesImageRef.current.src = "/ring.png";
+                        }}>Rings</div>
+                        <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
+                            // @ts-ignore
+                            categoriesImageRef.current.src = "/earring.png";
+                        }}>Earings</div>
+                        <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
+                            // @ts-ignore
+                            categoriesImageRef.current.src = "/pendent.png";
+                        }}>Pendants</div>
+                        <div id="categories-hover-element" className="absolute bg-[#E9D6C8] z-[0] w-[350px] top-1/2 flex justify-end items-end -translate-y-1/2 overflow-hidden left-[10%] aspect-video rotate-[75deg]">
+                            <img ref={categoriesImageRef} src="/ring.png" className="-rotate-[120deg] h-auto -translate-y-[10%] w-[70%]" alt="" />
+                        </div>
+                    </div>
+                        <Button className="hover:bg-transparent text-[#BFA6A1] absolute bottom-[5%] right-[10%] bg-transparent playpen-sans text-2xl hover:scale-110 transition-all">See more <ArrowRight /></Button>
+                </section>
                 <section id="shop-by-budget" className="w-full snap-start opacity-0 min-h-screen playfair-display relative mb-14 justify-center items-center">
                     {/* <div className="flex bg-yellow-900/50 rotate-z-[-30deg] w-[80%] justify-between overflow-x-hidden overflow-y-hidden py-10"> */}
                         <div id="shop-by-budget-hexagon-1" className="w-[500px] shop-by-budget-hexagon hover:cursor-pointer absolute overflow-hidden flex justify-center items-center top-[20%] left-[10%]" style={{
@@ -592,43 +629,6 @@ export const HomePage = () => {
                             </div>
                         </div>
                     </div>
-                </section>
-                <section id="categories" className="playfair-display opacity-0 relative w-full flex items-center snap-start h-[100vh] overflow-hidden flex-col" onMouseMove={( event ) => {
-                    if ( event.pageX < 465 || event.pageX > 1200 ) return;
-                    if ( event.pageX < 750 )
-                        elementRotate = (75 + ((event.pageX-465) / 10)); 
-                    else
-                    elementRotate = (75 + ((event.pageX-465) / 10)) - (((event.pageX - 465) * 1) / 30);
-                    console.log(event.pageX, elementRotate);
-                    gsap.to("#categories-hover-element", {
-                        // translateX: event.pageX,
-                        // x: (event.pageX > 500) && (event.pageX < 1200) ? event.pageX-465 : "",
-                        x: event.pageX-465,
-                        duration: 0.5,
-                        rotateZ: elementRotate,
-                    });
-                }}>
-                    <div className="gap-4 py-[5%] flex text-[#BFA6A1] text-[75px] h-[100%] justify-center w-[80%] relative ">
-                        <div className="flex-1 h-full cursor-pointer flex justify-center items-center z-10" onClick={(e) => {
-                            e.preventDefault();
-                            navigate("/collections");
-                        }} onMouseOver={() => {
-                            // @ts-ignore
-                            categoriesImageRef.current.src = "/ring.png";
-                        }}>Rings</div>
-                        <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
-                            // @ts-ignore
-                            categoriesImageRef.current.src = "/earring.png";
-                        }}>Earings</div>
-                        <div className="flex-1 h-full cursor-pointer  flex justify-center items-center z-10" onMouseOver={() => {
-                            // @ts-ignore
-                            categoriesImageRef.current.src = "/pendent.png";
-                        }}>Pendants</div>
-                        <div id="categories-hover-element" className="absolute bg-[#E9D6C8] z-[0] w-[350px] top-1/2 flex justify-end items-end -translate-y-1/2 overflow-hidden left-[10%] aspect-video rotate-[75deg]">
-                            <img ref={categoriesImageRef} src="/ring.png" className="-rotate-[120deg] h-auto -translate-y-[10%] w-[70%]" alt="" />
-                        </div>
-                    </div>
-                        <Button className="hover:bg-transparent text-[#BFA6A1] absolute bottom-[5%] right-[10%] bg-transparent playpen-sans text-2xl hover:scale-110 transition-all">See more <ArrowRight /></Button>
                 </section>
                 <section id="shop-by" className="w-[80%] hidden h-[100vh] snap-start overflow-hidden  self-center justify-self-center">
                 <svg width="1207" height="863" className="" viewBox="0 0 1207 863" fill="none" xmlns="http://www.w3.org/2000/svg">
