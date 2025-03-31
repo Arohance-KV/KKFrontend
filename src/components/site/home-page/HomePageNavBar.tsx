@@ -28,13 +28,13 @@ export const HomePageNavBar = () => {
 
     return (
         <>
-            <div className="sm:flex hidden w-full flex-col gap-4 bg-transparent absolute top-0 left-0 right-0 z-10">
+            <div className="sm:flex !text-white hidden w-full flex-col gap-4 bg-transparent absolute top-0 left-0 right-0 z-10">
                 <div className="min-h-[100px] flex relative px-10">
                     <Link to={"/"}>
                         <img src="/logo.svg" className="absolute left-1/2 h-20 -translate-x-1/2" />
                     </Link>
                     <div className="flex-1"></div>
-                    <div className="flex-[0.4] gap-[3%] flex justify-center items-center">
+                    <div className="flex-[0.4] gap-[3%] !stroke-white!text-white flex justify-center items-center">
                         <Link to={"/store-locator"}><MapPinned className="stroke-[1.5] stroke-[#A68A7E]" /></Link>
                         <div className="relative w-full">
                             <Input type="text" placeholder="Search" className="pl-6 h-8 border-[#A68A7E] border-2 bg-transparent text-[#A68A7E] placeholder:text-[#A68A7E]" />
@@ -65,7 +65,8 @@ export const HomePageNavBar = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="flex self-center items-center justify-evenly text-[#A68A7E] w-[80%]">
+                {/* <div className="flex !text-white self-center items-center justify-evenly text-[#A68A7E] w-[80%]"> */}
+                <div className="flex !text-white self-center items-center justify-evenly w-[80%]">
                     {/* <Link className="" to={"/"}>Home</Link> */}
                     <Link to={"/about"}>About</Link>
                     <Link to={"/collections"}>Collections</Link>
@@ -75,7 +76,7 @@ export const HomePageNavBar = () => {
                         Store Locator
                     </Link> */}
                     <Link to={"/giftcards"}>Giftcards</Link>
-                    <Link to={"/"}>12 month plan</Link>
+                    {/* <Link to={"/"}>12 month plan</Link> */}
                 </div>
             </div>
             <div id="phone-navbar" className="sm:hidden justify-between items-center flex w-full h-14">

@@ -256,11 +256,11 @@ export const HomePage = () => {
     return (
         <>
             <div className="sm:hidden w-full gap-8 min-h-screen flex-col flex">
-                <section className="w-[80%] aspect-square bg-black self-center mt-14">
-                    
+                <section className="w-[80%] aspect-square bg-white self-center mt-14">
+                    <img src="/mobile-banner.png" className="w-full h-full object-cover" alt="" />
                 </section>
                 <section className="inria-serif-regular text-[#BFA6A1] flex flex-col justify-center items-center gap-4">
-                    <p className="text-center">
+                    <p className="text-center px-4">
                         At Kultivated Karats, trust is our foundation. From pure diamonds to honest service, we ensure jewelry you can cherish with confidence
                     </p>
                     <div className="flex gap-4 scale-60  sm:scale-100">
@@ -274,7 +274,7 @@ export const HomePage = () => {
                         </div>
                         <div id="card" className="rounded-[25%] sm:hidden flex shadow-[0px_0px_20px_0px_rgba(119,96,23,0.25)] p-4 items-center justify-center border-[#C5B2A1] border-2 text-[#C5B2A1] flex-col w-[150px] aspect-square">
                             <Stamp className="w-[50%] h-[50%] stroke-2"/>
-                            <span className="font-bold text-sm">Hallmark pure gold</span>
+                            <span className="font-bold text-sm text-center">Hallmark pure gold</span>
                         </div>
                     </div>
                 </section>

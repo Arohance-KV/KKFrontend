@@ -172,7 +172,7 @@ export const AccountSettings = () => {
                             {OPTIONS[currentOption] == "Shipping Details" && <div className="h-full">
                                 <Form {...shippingAddressFrom}>
                                     <form className="flex-1 inria-serif-regular h-full text-white w-full p-[5%]" onSubmit={() => {}}>
-                                        <div className="flex-1 bg-pink-600 flex flex-col gap-6 ">
+                                        <div className="flex-1 flex flex-col gap-6 ">
                                             <FormField
                                                 control={shippingAddressFrom.control}
                                                 name="city"
