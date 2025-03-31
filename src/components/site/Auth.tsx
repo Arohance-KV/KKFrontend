@@ -10,6 +10,7 @@ import { Loader2, LockKeyholeIcon, LucideMail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "@/redux/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { setCustomerData } from "@/redux/slices/websiteSlice";
 
 export const loginFormSchema = z.object({
     email: z.string().email("Invalid email, enter a valid email address!"),
@@ -25,9 +26,9 @@ export const signUpFormSchema = z.object({
 });
 
 export const Auth = () => {
-
-    const dispatch = useDispatch();
     
+    const dispatch = useDispatch();
+
     const loginForm = useForm<z.infer<typeof loginFormSchema>>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
@@ -49,9 +50,7 @@ export const Auth = () => {
 
     const navigate = useNavigate();
 
-    const [ isAuthButtonLoading, setIsAuthButtonLoading ] = useState(false);
-
-    
+    const [ isAuthButtonLoading, setIsAuthButtonLoading ] = useState(false);  
 
     const onSignupFormSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
         setIsAuthButtonLoading(true);
@@ -79,9 +78,8 @@ export const Auth = () => {
                 console.log(data.errors);
               throw new Error(`${data.statusCode}, ${data}`);
             }
-            // setCustomerList(await getCustomers());
-            // setIsDialogOpen(false);
-            // toast.success("Customer create successfully!", { icon: <ToastSuccess />});
+
+            dispatch(setCustomerData(data.data));
             navigate("/");
         } catch (error: any) {
             console.error(error);
@@ -142,9 +140,9 @@ export const Auth = () => {
         <div className='w-full relative pb-14'>
             <UIsideBar side="left"/>
             <UIsideBar side="right"/>
-            <div className="bg-[#E1C6B3] mt-56 flex flex-col gap-8 items-center w-[60%] justify-self-center rounded-lg h-auto pb-8 aspect-video">
+            <div className="sm:bg-[#E1C6B3] sm:mt-56 mt-14 flex flex-col gap-8 items-center w-[60%] justify-self-center rounded-lg h-auto pb-8 aspect-video">
                 <p className="text-[#A68A7E] text-4xl mt-[6%] mb-[3%] font-[Inria_Serif]">{isSignUp ? "Create a new account" : "Sign in to your account"}</p>
-                <div className="w-[30%]">
+                <div className="sm:w-[30%] w-full">
                     {isSignUp ? <Form {...signUpForm}>
                         <form className="w-full flex flex-col gap-4 justify-center items-center" onSubmit={signUpForm.handleSubmit(onSignupFormSubmit)}>
                             <div className="gap-4 flex">
@@ -156,9 +154,9 @@ export const Auth = () => {
                                             {/* <FormLabel>Username</FormLabel> */}
                                             <div className="w-full relative">
                                                 <FormControl className="">
-                                                    <Input {...field} placeholder="First name" className="!border-none w-full placeholder:text-white !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
+                                                    <Input {...field} placeholder="First name" className="sm:!border-none border border-[#E1C6B3] w-full sm:placeholder:text-white placeholder:text-gray-600/30 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
                                                 </FormControl>
-                                                {/* <LucideMail className="stroke-white h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/> */}
+                                                {/* <LucideMail className="sm:stroke-white stroke-[#E1C6B3] h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/> */}
                                             </div>
                                             <FormMessage />
                                         </FormItem>);
@@ -172,9 +170,9 @@ export const Auth = () => {
                                             {/* <FormLabel>Username</FormLabel> */}
                                             <div className="w-full relative">
                                                 <FormControl className="">
-                                                    <Input {...field} placeholder="Last name" className="!border-none w-full placeholder:text-white !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
+                                                    <Input {...field} placeholder="Last name" className="sm:!border-none border border-[#E1C6B3] w-full sm:placeholder:text-white placeholder:text-gray-600/30 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
                                                 </FormControl>
-                                                {/* <LucideMail className="stroke-white h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/> */}
+                                                {/* <LucideMail className="sm:stroke-white stroke-[#E1C6B3] h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/> */}
                                             </div>
                                             <FormMessage />
                                         </FormItem>);
@@ -189,9 +187,9 @@ export const Auth = () => {
                                         {/* <FormLabel>Username</FormLabel> */}
                                         <div className="w-full relative">
                                             <FormControl className="">
-                                                <Input {...field} placeholder="Email" className="!border-none w-full placeholder:text-white pl-12 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
+                                                <Input {...field} placeholder="Email" className="sm:!border-none border border-[#E1C6B3] w-full sm:placeholder:text-white placeholder:text-gray-600/30 pl-12 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
                                             </FormControl>
-                                            <LucideMail className="stroke-white h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/>
+                                            <LucideMail className="sm:sm:stroke-white stroke-[#E1C6B3] h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/>
                                         </div>
                                         <FormMessage />
                                     </FormItem>);
@@ -209,7 +207,7 @@ export const Auth = () => {
                                                 <p className=" flex justify-center items-center">+91</p>
                                             </div>
                                             <FormControl className="">
-                                                <Input {...field} placeholder="Phone number" type="number" className="appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none !border-none w-full placeholder:text-white !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
+                                                <Input {...field} placeholder="Phone number" type="number" className="appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none sm:!border-none border border-[#E1C6B3] w-full sm:placeholder:text-white placeholder:text-gray-600/30 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
                                             </FormControl>
                                         </div>
                                         <FormMessage />
@@ -223,9 +221,9 @@ export const Auth = () => {
                                     return <FormItem className="flex w-full justify-center gap-1 items-center flex-col">
                                         <div className="relative w-full">
                                         <FormControl className="">
-                                                <Input {...field} placeholder="Password" type={showPassword ? "text" : "password" } className="!border-none w-full placeholder:text-white pl-12 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
+                                                <Input {...field} placeholder="Password" type={showPassword ? "text" : "password" } className="sm:!border-none border border-[#E1C6B3] w-full sm:placeholder:text-white placeholder:text-gray-600/30 pl-12 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
                                             </FormControl>
-                                            <LockKeyholeIcon className="stroke-white h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/>
+                                            <LockKeyholeIcon className="sm:stroke-white stroke-[#E1C6B3] h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/>
                                             {/* <Button type="button" className="bg-transparent hover:bg-transparent hover:shadow-lg absolute right-2 rounded-full h-0 w-0 p-4 top-1/2 -translate-y-1/2" onClick={(e) => {
                                                 e.preventDefault();
                                                 setShowPassword(!showPassword);
@@ -235,8 +233,9 @@ export const Auth = () => {
                                     </FormItem>    
                                 }}
                             />
-                            
-                            <Button disabled={isAuthButtonLoading} className="mt-4 w-full rounded-sm bg-[#A68A7E] hover:shadow-md hover:bg-transparent text-white hover:text-white" variant={"ghost"} type="submit">{isAuthButtonLoading ? <Loader2 className="animate-spin" /> : "Sign up"}</Button> 
+                            <Button disabled={isAuthButtonLoading} onClick={() => {
+                                console.log(signUpForm.formState.errors);
+                            }} className="mt-4 w-full rounded-sm bg-[#A68A7E] hover:shadow-md hover:bg-transparent text-white hover:text-white" variant={"ghost"} type="submit">{ isAuthButtonLoading ? <Loader2 className="animate-spin" /> : "Sign up"}</Button> 
                             <Button type="button" className="text-[#A68A7E] font-thin bg-transparent self-end -mt-2  h-auto text-xs p-0 hover:bg-transparent hover:underline" onClick={() => {
                                 setIsSignUp(false);
                             }}>Already have an account? Sign in!</Button>
@@ -253,9 +252,9 @@ export const Auth = () => {
                                         {/* <FormLabel>Username</FormLabel> */}
                                         <div className="w-full relative">
                                             <FormControl className="">
-                                                <Input {...field} placeholder="Email" className="!border-none w-full placeholder:text-white pl-12 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
+                                                <Input {...field} placeholder="Email" className="sm:!border-none border border-[#E1C6B3] w-full sm:placeholder:text-white placeholder:text-gray-600/30 pl-12 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
                                             </FormControl>
-                                            <LucideMail className="stroke-white h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/>
+                                            <LucideMail className="sm:stroke-white stroke-[#E1C6B3] h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/>
                                         </div>
 
                                         <FormMessage />
@@ -269,9 +268,9 @@ export const Auth = () => {
                                     return <FormItem className="flex w-full justify-center gap-1 items-center flex-col">
                                         <div className="relative w-full">
                                             <FormControl className="">
-                                                <Input {...field} placeholder="Password" type={showPassword ? "text" : "password" } className="!border-none w-full placeholder:text-white pl-12 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
+                                                <Input {...field} placeholder="Password" type={showPassword ? "text" : "password" } className="sm:!border-none border border-[#E1C6B3] w-full sm:placeholder:text-white placeholder:text-gray-600/30 pl-12 !ring-0 !outline-none !focus:border-none !focus:ring-0 !focus:outline-none rounded-none active:border-none bg-white/30 text-white" />
                                             </FormControl>
-                                            <LockKeyholeIcon className="stroke-white h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/>
+                                            <LockKeyholeIcon className="sm:stroke-white stroke-[#E1C6B3] h-4 w-4 absolute left-4 top-1/2 -translate-y-1/2"/>
                                             {/* <Button type="button" className="bg-transparent hover:bg-transparent hover:shadow-lg absolute right-2 rounded-full h-0 w-0 p-4 top-1/2 -translate-y-1/2" onClick={(e) => {
                                                 e.preventDefault();
                                                 setShowPassword(!showPassword);

@@ -48,7 +48,7 @@ export const ProductPage = () => {
         })()
         // console.log(document.getElementById("colour-input").value, document.getElementById("karat-input"), document.getElementById("quantity-input").value)
     }, []);    
-    
+
     useEffect(() => {
         setIsInWishList(currentWishlist?.find((item: IWishListItem) => item?.product?._id === productData?._id) == undefined ? false : true);
         setIsInCart(currentCart?.find((item: ICartItem) => item?.product?._id === productData?._id) == undefined ? false : true);
@@ -102,7 +102,7 @@ export const ProductPage = () => {
                     </div>
                 </div>
             </div> */}
-            <div id='solitare-main' className="border-[#E1C6B3] sm:flex-row flex-col flex border flex-col opacity-0 w-[90%] justify-self-center rounded-lg aspect-video">
+            <div id='solitare-main' className="border-[#E1C6B3] flex-col flex border opacity-0 w-[90%] justify-self-center rounded-lg aspect-video">
                 <div className="px-[5%] flex h-full">
                     <div className="relative min-h-80 flex flex-col justify-between flex-[0.55]">
                         {/* <EmblaCarousel product={productData!} /> */}
@@ -241,6 +241,10 @@ export const ProductPage = () => {
                         {/* <p>Our promises</p> */}
                     </div>
                 </div>
+                {/* <div className="bg-blue-600 #A68A7E inria-serif-regular text-[] w-1/2 flex-1/2" id="price-calculation">
+                    <p>{ productData?.goldWeight }</p>
+                    <p>Karats : { productData?.totalKarats }</p>
+                </div> */}
                 <div></div>
             </div>
         </section>

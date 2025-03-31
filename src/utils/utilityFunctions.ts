@@ -1,6 +1,8 @@
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 import { ICartItem, IWishListItem } from "./interfaces.ts";
 import { setCustomerData } from "../redux/slices/websiteSlice.ts";
+import { z } from "zod";
+import { formSchema } from "@/components/site/home-page/Solitare.tsx";
 
 export const updateWishList = async ( wishListItem: IWishListItem, isAdd: boolean, currentWishlist: IWishListItem[], dispatch: Dispatch<UnknownAction>, isUserPresent: boolean, cart?: ICartItem[], videoCallCart?: ICartItem[] ) => {
     console.log(videoCallCart);
@@ -180,4 +182,23 @@ export const clearCart = async ( dispatch: Dispatch<UnknownAction>, isUserPresen
         // console.log(userData);
         return false;
     }
+};
+
+export const getSolitareHtml = (values: z.infer<typeof formSchema>) => {
+    
+    const currentDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(new Date());
+    
+    return `<div style="color: #A68A7E; display: flex; gap: 16px; flex-direction: column; border-radius: 20px; border: 1px solid #A68A7E; padding: 10px; width: auto;">
+      <p>Email: ${values?.email}</p>
+      <p>Phone Number: ${values?.phoneNo}</p>
+      <p>Shape: ${values?.shape}</p>
+      <p>Carat: ${values?.carat}</p>
+      <p>Colour: ${values?.colour}</p>
+      <p>Gold Weight: ${values?.goldWeight}</p>
+      ${values?.multiDiamonds ? `<p>Multi Diamonds ✔</p><br><p>No of multidiamonds: ${values?.noOfDiamonds}</p>` : ""}
+      <p>Multi Diamonds: ${values?.multiDiamonds}</p>
+      <p>Multi Diamonds: ${values?.noOfDiamonds}</p>
+      <p>Additional requirements: ${values?.additionalRequirements ? values?.additionalRequirements! : "none"}</p>
+      <p>Date: ${currentDate}</p>
+    </div>`
 };

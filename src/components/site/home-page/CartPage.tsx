@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
+import { setCustomerData } from "@/redux/slices/websiteSlice";
 
 
 export const CartPage = () => {
@@ -17,31 +18,26 @@ export const CartPage = () => {
 
     const [ isPlaceOrderButtonLoading, setIsPlaceOrderButtonLoading ] = useState(false);
 
-    const [ cartItems, setCartItems ] = useState<ICartItem[]>();
     const customerData: IUser = useSelector((state: any) => state.website.customerData);
-    
-    const [ totalPrice, setTotalPrice ] = useState(0);
-    
+    // const [ cartItems, setCartItems ] = useState<ICartItem[]>([]);
+    const [ cartItems, setCartItems ] = useState<ICartItem[]>([]);
+    const [ cartTotal, setCartTotal ] = useState<number>(-1);
+
     useEffect(() => {
         setCartItems(customerData?.cart);
-        const cartTotal = cartItems?.reduce((total, item) => {
-            return total + (item?.totalPrice * item?.quantity);
-        }, 0);
-        console.log(`Cart Total : ${cartTotal}`);
-        console.log(cartItems);
-        setTotalPrice(cartTotal!);
-        console.log(totalPrice)
-        // const cartTotal = cartItems?.reduce((total, item) => {
-        //     return total + item?.totalPrice;
-        // }, 0);
-        const GST = (Math.round(cartTotal!) * (3 / 100));
-        setCartFinalPrice(Math.round(cartTotal!)! + GST);
-        console.log(GST, cartFinalPrice);
-        setTotalPrice(Math.round(cartTotal!)!);
+        setCartTotal(cartItems?.reduce((total, cartItem) => {
+            return total + (cartItem?.totalPrice * cartItem?.quantity)
+        }, 0));
     }, [ customerData ]);
 
 
-    const [ cartFinalPrice, setCartFinalPrice ]= useState(0);
+    useEffect(() => {
+        setCartTotal(cartItems?.reduce((total, cartItem) => {
+            return total + (cartItem?.totalPrice * cartItem?.quantity)
+        }, 0));
+    }, [ cartItems ]);
+
+
 
 
     // const [ isOrderPlacing, setIsOrderPlacing ] = useState(false);
@@ -70,7 +66,7 @@ export const CartPage = () => {
                     </p>
                     <div className="w-[90%] max-h-full gap-4 h-full mx-[5%] pb-8 flex sm:flex-row flex-col">
                         <div className="flex-[0.6]  flex gap-4 overflow-y-scroll no-scrollbar flex-col">
-                            {cartItems?.map((cartItem: ICartItem) => <CartItem customerData={customerData} dispatch={dispatch} cartItem={cartItem} cartItems={cartItems} />)}
+                            {cartItems?.map((cartItem: ICartItem) => (<CartItem customerData={customerData} dispatch={dispatch} cartItem={cartItem} cartItems={cartItems} setCartItems={setCartItems} />))}
                         </div>
                         <div className="text inria-serif-regular text-[#A68A7E] flex flex-col border-2 bg-white border-[#BFA6A1] rounded-md h-full flex-[0.4]">
                             <p className="p-4 flex justify-start text-xl">Order summary</p>
@@ -78,15 +74,15 @@ export const CartPage = () => {
                                 <p>Total items : {cartItems?.reduce((total, item) => {
                                     return total + item?.quantity;
                                 }, 0)}</p>
-                                <p>Price : {Math.round(totalPrice)}</p>
+                                <p>Price : {Math.round(cartTotal)}</p>
                             </div>
                             <div className="w-[90%] mb-4 flex justify-between justify-self-center self-center">
                                 <p>+ 3% GST</p>
-                                <p>{(Math.round((totalPrice!) * (3 / 100)))}</p>
+                                <p>{(Math.round((cartTotal) * (3 / 100)))}</p>
                             </div>
                             <div className="w-[90%] mb-4 self-center flex justify-between">
                                 <p>Cart total</p>
-                                <p>{Math.round(cartFinalPrice)}</p>
+                                <p>{Math.round(cartTotal + (cartTotal * (3 / 100)))}</p>
                             </div>
                             <div className="flex flex-col gap-4 justify-center items-center">
                                 <div className="relative w-[80%]">
@@ -133,7 +129,7 @@ export const CartPage = () => {
                                 </div>
                                 <Button disabled={cartItems?.length! <= 0 || isPlaceOrderButtonLoading} className="text-white bg-[#E1C6B3] w-[80%] self-center my-4 hover:bg-[#A68A7E] hover:text-white" onClick={ async (e) => {
                                     e.preventDefault();
-                                    console.log(totalPrice);
+                                    // console.log(totalPrice);
                                     setIsPlaceOrderButtonLoading(true);
                                     try {
                                         // @ts-ignore
@@ -143,7 +139,8 @@ export const CartPage = () => {
                                                 "Content-Type": "application/json",
                                             },
                                             body: JSON.stringify({ options: {
-                                                amount: (Math.round(cartFinalPrice) * 100),
+                                                amount: (Math.round(cartTotal + ( cartTotal * (3 / 100))) * 100),
+                                                // amount: (Math.round(100) * 100),
                                                 currency: "INR",
                                             }}),
                                             credentials: "include"
@@ -198,9 +195,12 @@ export const CartPage = () => {
                                                         },
                                                         body: JSON.stringify({ 
                                                             order: {
-                                                                orderId: Math.random() * 1000000 + 1,
+                                                                orderId: Math.round(Math.random() * 100000000 + 1),
                                                                 customerId: customerData?._id,
-                                                                total: totalPrice || 0,
+                                                                total: (Math.round(cartItems?.reduce((total, item) => {
+                                                                    return total + item?.totalPrice * item?.quantity;
+                                                                }, 0)!) || 0),
+                                                                // total: 0,
                                                                 deliveryAddress: customerData?.address,
                                                                 orderStatus: "Pending",
                                                                 cart: customerData?.cart,
@@ -216,7 +216,7 @@ export const CartPage = () => {
                                                     
                                                     const orderData = await orderResponse.json();
                                                     console.log(orderData, orderResponse);
-                                                    
+                                                    dispatch(setCustomerData(orderData?.data));
                                                     await clearCart(dispatch, customerData?._id ? true : false);
                                                     navigate("/payment-success");
                                                 } catch (error) {
@@ -262,7 +262,8 @@ export const CartPage = () => {
     );
 };
 
-const CartItem = ({ cartItem, cartItems, dispatch, customerData } : { cartItem: ICartItem, cartItems: ICartItem[], dispatch: Dispatch, customerData: IUser }) => {
+
+const CartItem = ({ cartItem, cartItems, dispatch, customerData, setCartItems } : { cartItem: ICartItem, cartItems: ICartItem[], dispatch: Dispatch, customerData: IUser, setCartItems: React.Dispatch<React.SetStateAction<ICartItem[]>> }) => {
 
     const [ isRemoveItemLoadingButton, setIsRemoveItemLoadingButton ] = useState(false);
 
@@ -283,6 +284,8 @@ const CartItem = ({ cartItem, cartItems, dispatch, customerData } : { cartItem: 
                     setIsRemoveItemLoadingButton(true);
                     await updateCart({ product: cartItem.product!, quantity: 1, color: "white", karat: 14, totalPrice: 0 }, false, false, cartItems, dispatch, customerData?._id ? true : false, customerData?.wishList, customerData?.videoCallCart);
                     setIsRemoveItemLoadingButton(false);
+                    console.log(customerData?.cart)
+                    setCartItems(customerData?.cart)
                     // setIsInVideoCallCart(false);
                     return toast.success("Product deleted from cart successfully!", { className: "font-[quicksand]", icon: <Trash2 className="w-4 h-4 stroke-red-500" /> });            
                 }}><Minus className="w-2 h-2" /></Button>

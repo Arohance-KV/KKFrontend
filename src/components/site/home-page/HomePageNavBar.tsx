@@ -7,13 +7,13 @@ import { IUser } from "@/utils/interfaces";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Squash as Hamburger } from 'hamburger-react';
-import { slide as Menu } from 'react-burger-menu';
+// import { slide as Menu } from 'react-burger-menu';
 import { Input } from "@/components/ui/input";
 
 export const HomePageNavBar = () => {
 
     const customerData: IUser = useSelector((state: any) => state.website.customerData);
-
+    
     const [ wishListLength, setWishListLength ] = useState(0);
     const [ cartLength, setCartLength ] = useState(0);
     const [ videoCartLength, setVideoCartLength ] = useState(0);

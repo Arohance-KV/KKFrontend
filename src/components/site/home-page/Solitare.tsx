@@ -11,6 +11,8 @@ import { Button } from '../../ui/button';
 import { Checkbox } from '../../ui/checkbox';
 import { cn } from '../../../lib/utils';
 import { gsap } from "gsap";
+import { getSolitareHtml } from '@/utils/utilityFunctions';
+import { Gem, Loader2 } from 'lucide-react';
 
 const shapeOptions = [
     {
@@ -88,7 +90,7 @@ enum Colour {
 };
   
 
-const formSchema = z.object({
+export const formSchema = z.object({
     email: z.string().email('Enter a valid email address!').min(0), // Add email validation
     shape: z.nativeEnum(Shapes, {
       required_error: 'Shape is required!',
@@ -176,8 +178,29 @@ export const Solitare = () => {
         },
     });
     
+    const [ isSubmitButtonLoading, setIsSubmitButtonLoading ] = useState(false);
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         console.log(values);
+        setIsSubmitButtonLoading(true);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}email/send-email`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: 'include',
+                body: JSON.stringify({ email: { from: values?.email, to: import.meta.env.VITE_TO_EMAIL, subject: `Solitare enquiry from : ${values?.email}`, html: getSolitareHtml(values) }})
+            });
+        
+            const data = await response.json();
+            console.log(data);
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsSubmitButtonLoading(false);
+        }
     };
 
     return (
@@ -296,9 +319,9 @@ export const Solitare = () => {
                                 )}
                             />
                             <div className='h-1/2 hidden sm:block w-full relative'>
-                                <Button className='bg-transparent  absolute hover:text-[#E1C6B3] px-[20%] sm:hover:bg-white hover:bg-[#E1C6B3] right-0 bottom-0 border-white text-white border'>Request a quote</Button>
+                                <Button disabled={isSubmitButtonLoading} className='bg-transparent absolute hover:text-[#E1C6B3] px-[20%] sm:hover:bg-white hover:bg-[#E1C6B3] right-0 bottom-0 border-white text-white border'>{ isSubmitButtonLoading ? <Loader2 className='w-4 h-4 animate-spin' /> :  `Request a quote`}</Button>
                             </div>
-                            <Button className='bg-transparent block sm:hidden absolute hover:text-[#E1C6B3] px-[20%] sm:hover:bg-white hover:bg-[#E1C6B3] right-5 bottom-5 border-white text-white border'>Request a quote</Button>
+                            <Button disabled={isSubmitButtonLoading} className='bg-transparent block sm:hidden absolute hover:text-[#E1C6B3] px-[20%] sm:hover:bg-white hover:bg-[#E1C6B3] right-5 bottom-5 border-white text-white border'>{ isSubmitButtonLoading ? <Loader2 className='w-4 h-4 animate-spin' /> :  `Request a quote`}</Button>
                         </div>
                         <div className="col-start-3 grid grid-rows-5 row-start-1 col-span-1 row-span-2">
                             <FormField
@@ -387,13 +410,16 @@ export const Solitare = () => {
                                                 >
                                                     <p>Requirement of multiple stones :</p>
                                                     <Checkbox
-                                                        className='data-[state=checked]:bg-[#fff] border-white'
+                                                        className='!data-[state=checked]:bg-[#E1C6B3] data-[state=checked]:text-[#E1C6B3] border-white'
+                                                        // className='border-white'
                                                         checked={field.value}
                                                         onCheckedChange={(checked: boolean) => {
                                                             setShowNoOfDiamonds(checked);
                                                             field.onChange(checked);
                                                         }}
-                                                    />
+                                                    >
+                                                        {/* <Gem className='bg-red-600 w-4 h-4 stroke-yellow-600' /> */}
+                                                    </Checkbox>
                                                 </div>
                                         </FormControl>
                                         <FormDescription />

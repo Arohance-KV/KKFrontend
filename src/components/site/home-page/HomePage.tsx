@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
+import { BLOGDATA } from "@/utils/constants";
 
 const Reel = ({ reel } : { reel: {title: string, url: string, product: string }}) => {
     return (
@@ -26,50 +27,6 @@ const Reel = ({ reel } : { reel: {title: string, url: string, product: string }}
     );
 };
 
-const BLOGDATA = [
-    {
-        _id: "id",
-        blogName: "first",
-        title: "Natural vs Lab-grown diamonds",
-        blogImageUrl: {
-            url: "/KultivatedKaratsAssets/blog-1-banner.png",
-            publicId: "a",
-        },
-        blogContent: {
-            design: "string",
-            markup: "string",
-            description: ""
-        },
-    },
-    {
-        _id: "id2",
-        blogName: "first",
-        title: "Rings",
-        blogImageUrl: {
-            url: "/KultivatedKaratsAssets/blog-2-banner.png",
-            publicId: "a",
-        },
-        blogContent: {
-            design: "string",
-            markup: "string",
-            description: "This is another blog"
-        },
-    },
-    {
-        _id: "id3",
-        blogName: "first",
-        title: "2025 Jewellery trends",
-        blogImageUrl: {
-            url: "/KultivatedKaratsAssets/blog-3-banner.png",
-            publicId: "a",
-        },
-        blogContent: {
-            design: "string",
-            markup: "<p></p>",
-            description: "Here's yet another blog"
-        },
-    },
-]
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -184,7 +141,9 @@ export const HomePage = () => {
             duration: 1
         })
         
-        
+        gsap.to("#categories-hover-element", {
+            
+        });
 
         gsap.to("#shop-by-budget", {
             scrollTrigger: {
@@ -302,7 +261,7 @@ export const HomePage = () => {
                 </section>
                 <section className="inria-serif-regular text-[#BFA6A1] flex flex-col justify-center items-center gap-4">
                     <p className="text-center">
-                        Лорем ипсум долор сит амет, пер цлита поссит ех, ат мунере фабулас петентиум сит. Иус цу цибо саперет сцрипсерит, нец виси муциус лабитур ид. Ет хис нонумес нолуиссе дигниссим
+                        At Kultivated Karats, trust is our foundation. From pure diamonds to honest service, we ensure jewelry you can cherish with confidence
                     </p>
                     <div className="flex gap-4 scale-60  sm:scale-100">
                         <div id="card" className="rounded-[25%] shadow-[0px_0px_20px_0px_rgba(119,96,23,0.25)] flex p-4 items-center justify-center border-[#C5B2A1] border-2 text-[#C5B2A1] flex-col w-[150px] aspect-square">
@@ -456,7 +415,7 @@ export const HomePage = () => {
                 </section>
                 <section id="about-us-section" className="flex sm:mt-14 gap-4 sm:gap-14 items-center h-auto sm:self-end flex-col sm:flex-row mb-10 w-[85%] sm:justify-self-end justify-self-center self-center justify-between">
                     <div className="italic sm:hidden p-4 sm:text-2xl text-sm  text-[#BFA6A1] flex justify-center items-center">
-                        Лорем ипсум долор сит амет, пер цлита поссит ех,
+                        At Kultivated Karats, trust is our foundation. From pure diamonds to honest service, we ensure jewelry you can cherish with confidence
                     </div>
                     <Button onClick={() => navigate("/about")} className="bg-[#BFA6A1] mb-8 text-white px-4 rounded-none sm:hidden block">About us</Button>
                     <div className="flex gap-4 scale-50 sm:scale-100">
@@ -480,7 +439,7 @@ export const HomePage = () => {
                         <div className="flex-[0.5] border-1 h-[5px] w-full bg-[#BFA6A1]"></div>
                         <div className="relative h-[150px] w-full flex-1">
                             <div className="border-[#BFA6A1] text-[#BFA6A1] italic p-10 border-4 flex justify-center items-center w-[97%] text-wrap h-[90%] bottom-0 left-0 absolute">
-                                Лорем ипсум долор сит амет, пер цлита поссит ех, ат мунере фабулас петентиум сит. Иус цу цибо саперет сцрипсерит, нец виси муциус лабитур ид. Ет хис нонумес нолуиссе дигниссим
+                                At Kultivated Karats, trust is our foundation. From pure diamonds to honest service, we ensure jewelry you can cherish with confidence
                             </div>
                             <div className="border-[#BFA6A1] p-10 border-4 flex justify-center items-center w-[97%] text-wrap h-[90%] top-0 right-0 absolute">
                                 
@@ -878,7 +837,7 @@ const BlogSection = () => {
                     })}
                 </div>
                 <div className="flex w-[80%] self-center justify-self-center h-[75%]">
-                    <img src={BLOGDATA[selectedBlog]?.blogImageUrl?.url} alt="" className="flex-1 w-1/2 aspect-square object-cover" />
+                    <img src={BLOGDATA[selectedBlog]?.blogImageUrl?.url} alt="" className="flex-1 w-1/2 object-cover" />
                     <div className="flex-1 gap-8 px-10 flex justify-center flex-col">
                         <p>{BLOGDATA[selectedBlog]?.blogContent?.description}</p>
                         <Button className="bg-[#BFA6A1] text-white hover:text-white hover:bg-[#8b7a76] w-36 font-medium px-4 py-2 rounded-none" onClick={(e) => {
@@ -888,7 +847,10 @@ const BlogSection = () => {
                     </div> 
                 </div>
             </div>
-            <Button className="text-[#8b7a76] bg-transparent hover:bg-transparent text-3xl absolute bottom-[5%] right-0">See all</Button>
+            <Button className="text-[#8b7a76] bg-transparent hover:bg-transparent text-3xl absolute bottom-[5%] right-0" onClick={(e) => {
+                e.preventDefault();
+                navigate("/blogs/");
+            }}>See all</Button>
         </section>
-    )
+    );
 };
