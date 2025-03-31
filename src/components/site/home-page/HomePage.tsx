@@ -738,7 +738,8 @@ export const HomePage = () => {
                             <img src="/KultivatedKaratsAssets/about-us-2.png" className="w-[66%] h-[140%] object-cover absolute top-[-20%] left-[10%]" alt="" />
                         </div>
                         <div className="flex-[0.55] text-[#8a7875]">
-                            <div className=" -translate-x-[10%] text-xl w-[90%]">
+                            {/* <div className=" -translate-x-[10%] text-xl w-[90%]"> */}
+                            <div className="text-xl w-[90%]">
                                 Lab-grown diamonds capture the beauty of everlasting love—pure, radiant, and ethically crafted. Each sparkle tells a story of brilliance without compromise, a promise of sustainability and elegance. Wear a gem that shines with emotion, reflecting your values and timeless grace.
                             </div>
                         </div>
