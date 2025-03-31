@@ -12,7 +12,7 @@ import { Checkbox } from '../../ui/checkbox';
 import { cn } from '../../../lib/utils';
 import { gsap } from "gsap";
 import { getSolitareHtml } from '@/utils/utilityFunctions';
-import { Gem, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 const shapeOptions = [
     {
@@ -190,7 +190,7 @@ export const Solitare = () => {
                     "Content-Type": "application/json",
                 },
                 credentials: 'include',
-                body: JSON.stringify({ email: { from: values?.email, to: import.meta.env.VITE_TO_EMAIL, subject: `Solitare enquiry from : ${values?.email}`, html: getSolitareHtml(values) }})
+                body: JSON.stringify({ email: { from: import.meta.env.VITE_TO_EMAIL, to: [ import.meta.env.VITE_TO_EMAIL, "maheksampat@gmail.com" ], subject: `Solitare enquiry from : ${values?.email}`, html: getSolitareHtml(values) }})
             });
         
             const data = await response.json();

@@ -25,7 +25,7 @@ export const WishListPage = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className='w-full relative pb-14'>
+        <div className='w-full relative sm:min-h-auto min-h-screen pb-14'>
             <UIsideBar side="left"/>
             <UIsideBar side="right"/>
             <div id='solitare-main' className="sm:bg-[#E1C6B3] px-8 opacity-0 sm:mt-56 mt-14 gap-10 flex flex-col items-center sm:w-[80%] w-full justify-self-center rounded-tr-[100px] aspect-video">

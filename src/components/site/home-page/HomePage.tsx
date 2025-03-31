@@ -255,7 +255,7 @@ export const HomePage = () => {
 
     return (
         <>
-            <div className="sm:hidden w-full gap-8 min-h-screen flex-col flex">
+            <div className="sm:hidden w-full gap-14 min-h-screen flex-col flex">
                 <section className="w-[80%] aspect-square bg-white self-center mt-14">
                     <img src="/mobile-banner.png" className="w-full h-full object-cover" alt="" />
                 </section>
@@ -307,25 +307,26 @@ export const HomePage = () => {
                         <img src="/KultivatedKaratsAssets/collections-banner.png" className="w-full h-full object-cover" alt="" />
                     </div>
                 </section>
-                <section className="w-full flex flex-col gap-8 justify-center items-center">
+                <section className="w-full flex flex-col gap-8 justify-center my-14 items-center">
+                    <p className="text-[#E1C6B3] inria-serif-regular my-4 text-3xl">Shop by categories</p>
                     <div onClick={(e) => {
                         e.preventDefault();
                         navigate("/collections");
                     }} className="border text-white inria-serif-regular flex-col justify-center items-center border-[#BFA6A1] w-[80%] flex bg-[#BFA6A1]">
-                        <img src="" className="w-full bg-white aspect-square" alt="" />
+                        <img src="/mobile-rings.png" className="w-full bg-white aspect-square" alt="" />
                         <p className="py-4">Rings</p>
                     </div>
                     <div className="border text-white inria-serif-regular flex-col justify-center items-center border-[#BFA6A1] w-[80%] flex bg-[#BFA6A1]">
-                        <img src="" className="w-full bg-white aspect-square" alt="" />
+                        <img src="/mobile-earings.png" className="w-full bg-white aspect-square" alt="" />
                         <p className="py-4">Earings</p>
                     </div>
                     <div className="border text-white inria-serif-regular flex-col justify-center items-center border-[#BFA6A1] w-[80%] flex bg-[#BFA6A1]">
-                        <img src="" className="w-full bg-white aspect-square" alt="" />
+                        <img src="/mobile-pendant.png" className="w-full bg-white aspect-square" alt="" />
                         <p className="py-4">Pendants</p>
                     </div>
                 </section>
-                <section className="w-[80%] justify-self-center self-center justify-center items-center flex flex-col gap-4 text-[#BFA6A1] text-center">
-                    <p className="text-xl">Shop by look</p>
+                <section className="w-[80%] my-14 justify-self-center self-center justify-center items-center flex flex-col gap-4 text-[#BFA6A1] text-center">
+                    <p className="text-3xl">Shop by look</p>
                     <div className="flex flex-row gap-4">
                         {REELS_DATA.map(reel => {
                             return (
@@ -385,11 +386,11 @@ export const HomePage = () => {
                     </div>
                 </section>
                 <section className="my-8 w-full flex gap-4 justify-evenly flex-col items-center">
-                    <p className="blog-section-fade text-[#BFA6A1]">Read the blog</p>    
+                    <p className="blog-section-fade text-3xl text-[#BFA6A1]">Read the blog</p>    
                     <div className="flex justify-evenly w-full items-center">
                         {BLOGDATA?.map((blog) => (
                             <div className="">
-                                <img src={ blog?.blogImageUrl?.url } className="w-18 aspect-video" />
+                                <img src={ blog?.blogImageUrl?.url } className="w-32 aspect-video" />
                             </div>
                         ))}
                     </div>
