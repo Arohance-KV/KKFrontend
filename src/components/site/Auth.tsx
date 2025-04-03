@@ -126,7 +126,7 @@ export const Auth = () => {
             console.error("Error: ", error);
         } finally {
             setIsAuthButtonLoading(false);
-        }
+        } 
     }
 
     const [ showPassword, setShowPassword ] = useState(false);
