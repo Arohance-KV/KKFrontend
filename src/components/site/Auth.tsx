@@ -10,7 +10,7 @@ import { Loader2, LockKeyholeIcon, LucideMail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "@/redux/slices/userSlice";
 import { useDispatch } from "react-redux";
-import { setCustomerData } from "@/redux/slices/websiteSlice";
+// import { setCustomerData } from "@/redux/slices/websiteSlice";
 
 export const loginFormSchema = z.object({
     email: z.string().email("Invalid email, enter a valid email address!"),
@@ -131,7 +131,7 @@ export const Auth = () => {
 
     const [ showPassword, setShowPassword ] = useState(false);
 
-    // console.log(setShowPassword);
+    console.log(setShowPassword);
     
 
     const [ isSignUp, setIsSignUp ] = useState(false);

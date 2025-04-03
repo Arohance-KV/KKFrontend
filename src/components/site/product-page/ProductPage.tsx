@@ -15,7 +15,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { getDiamondPrice } from "@/utils/CalculateTotal";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, 
+    // SelectLabel
+    SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export const ProductPage = () => {
     const { productId }= useParams();
@@ -36,7 +38,7 @@ export const ProductPage = () => {
     // @ts-ignore
     const [ isInVideoCallCartButtonLoading, setIsInVideoCallCartButtonLoading ] = useState(false);
 
-    const [ price, setPrice ] = useState<number>(0);
+    // const [ price, setPrice ] = useState<number>(0);
 
     const quantityRef = useRef(1);
     const karatRef = useRef(14);

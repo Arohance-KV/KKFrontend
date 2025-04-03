@@ -31,7 +31,7 @@ const Reel = ({ reel } : { reel: {title: string, url: string, product: string }}
 
 gsap.registerPlugin(ScrollTrigger);
 
-let elementRotate: number;
+// let elementRotate: number;
 
 const REELS_DATA = [
     {
@@ -524,7 +524,8 @@ export const HomePage = () => {
                         </div>
                     </div>
                 </section>
-                <section id="categories" className="playfair-display opacity-0 relative w-full flex items-center snap-start h-[100vh] overflow-hidden flex-col" onMouseMove={( event ) => {
+                <section id="categories" className="playfair-display opacity-0 relative w-full flex items-center snap-start h-[100vh] overflow-hidden flex-col" 
+                // onMouseMove={( event ) => {
                     // if ( event.pageX < 465 || event.pageX > 1200 ) return;
                     // if ( event.pageX < 750 )
                     //     elementRotate = (75 + ((event.pageX-465) / 10)); 
@@ -538,7 +539,8 @@ export const HomePage = () => {
                     //     duration: 0.5,
                     //     rotateZ: elementRotate,
                     // });
-                }}>
+                // }}
+                >
                     <div className="gap-4 py-[5%] flex text-[#BFA6A1] text-[75px] h-[100%] justify-center w-[80%] relative ">
                         <div className="flex-1 h-full cursor-pointer flex justify-center items-center z-10" onClick={(e) => {
                             e.preventDefault();
