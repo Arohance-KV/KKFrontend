@@ -56,37 +56,37 @@ export const Auth = () => {
         setIsAuthButtonLoading(true);
         console.log(values);
 
-        try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/register`, {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              credentials: 'include',
-              body: JSON.stringify({userData: {...values, role: "Customer"}})
-            });
+        // try {
+        //     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${import.meta.env.VITE_PORT}${import.meta.env.VITE_API_URL}users/register`, {
+        //       method: "POST",
+        //       headers: {
+        //           "Content-Type": "application/json",
+        //       },
+        //       credentials: 'include',
+        //       body: JSON.stringify({userData: {...values, role: "Customer"}})
+        //     });
       
-            const data = await response.json();
-            console.log(data);
+        //     const data = await response.json();
+        //     console.log(data);
       
-            if ( !response.ok ){
-              // productCreateForm.setError(data.type, { type: "manual", message: data?.errorMessage });
-              if ( data?.errors[0]?.type !== undefined )
-                data.errors.map((err: any) => {
-                  signUpForm.setError(err.type, { type: "manual", message: err.message });
-                });
-                console.log(data.errors);
-              throw new Error(`${data.statusCode}, ${data}`);
-            }
+        //     if ( !response.ok ){
+        //       // productCreateForm.setError(data.type, { type: "manual", message: data?.errorMessage });
+        //       if ( data?.errors[0]?.type !== undefined )
+        //         data.errors.map((err: any) => {
+        //           signUpForm.setError(err.type, { type: "manual", message: err.message });
+        //         });
+        //         console.log(data.errors);
+        //       throw new Error(`${data.statusCode}, ${data}`);
+        //     }
 
-            dispatch(setCustomerData(data.data));
-            navigate("/");
-        } catch (error: any) {
-            console.error(error);
-            // toast.error("Failed to create user!", { description: (error?.errors[0]?.message || ""), icon: <ToastFaliure /> });
-        } finally {
-            setIsAuthButtonLoading(false);
-        }
+        //     dispatch(setCustomerData(data.data));
+        //     navigate("/");
+        // } catch (error: any) {
+        //     console.error(error);
+        //     // toast.error("Failed to create user!", { description: (error?.errors[0]?.message || ""), icon: <ToastFaliure /> });
+        // } finally {
+        //     setIsAuthButtonLoading(false);
+        // }
     };
 
     const onLoginFormSubmit = async (values: z.infer<typeof loginFormSchema>) => {
@@ -131,7 +131,7 @@ export const Auth = () => {
 
     const [ showPassword, setShowPassword ] = useState(false);
 
-    console.log(setShowPassword);
+    // console.log(setShowPassword);
     
 
     const [ isSignUp, setIsSignUp ] = useState(false);
@@ -233,8 +233,9 @@ export const Auth = () => {
                                     </FormItem>    
                                 }}
                             />
-                            <Button disabled={isAuthButtonLoading} onClick={() => {
-                                console.log(signUpForm.formState.errors);
+                            <Button disabled={isAuthButtonLoading} onClick={async () => {
+                                console.log(signUpForm?.formState?.errors);
+                                // await onSignupFormSubmit(signUpForm?.getValues());
                             }} className="mt-4 w-full rounded-sm bg-[#A68A7E] hover:shadow-md hover:bg-transparent text-white hover:text-white" variant={"ghost"} type="submit">{ isAuthButtonLoading ? <Loader2 className="animate-spin" /> : "Sign up"}</Button> 
                             <Button type="button" className="text-[#A68A7E] font-thin bg-transparent self-end -mt-2  h-auto text-xs p-0 hover:bg-transparent hover:underline" onClick={() => {
                                 setIsSignUp(false);

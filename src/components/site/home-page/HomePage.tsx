@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { BLOGDATA } from "@/utils/constants";
+import { TestimonialCard } from "./Text";
 
 const Reel = ({ reel } : { reel: {title: string, url: string, product: string }}) => {
     return (
@@ -53,9 +54,20 @@ const REELS_DATA = [
 
 // const scrollAnimationTimeline = gsap.timeline();
 
+const TESTIMONIALS = [
+    {
+        customerName: "Karandeep",
+        rating: 5,
+        descripttion: `I couldn’t be happier with my decision to purchase a lab-grown diamond from Kultivated Carats! From start to finish, the experience was exceptional. The website was easy to navigate, and I really appreciated the transparency about the diamond’s origin and the sustainable practices behind its creation.`,
+        sourceLogo: {
+            url: `https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1`,
+            publicId: ""
+        }
+    }
+]
+
 export const HomePage = () => {
 
-    
     useEffect(() => {
         gsap.to("#hero-section", {
             // width: "100%",
@@ -246,7 +258,45 @@ export const HomePage = () => {
                 opacity: "100%",
                 duration: 1,
             });
-
+            // gsap.to("#categories-hover-element", {
+            //     translateX: "300px",
+            //     duration: 1.5,
+            //     rotateZ: 80,
+            //     onComplete: () => {
+            //         gsap.to("#categories-hover-element", {                        
+            //             translateX: "560px",
+            //             duration: 1.5,
+            //             rotateZ: 100,
+            //             yoyo: true,
+            //             onComplete: () => {
+            //                 gsap.to("#categories-hover-element", {                        
+            //                     translateX: "0",
+            //                     duration: 1.5,
+            //                     rotateZ: 75,
+            //                     yoyo: true
+            //                 });
+            //             }
+            //         });
+                    
+            //     },
+            //     yoyo: true
+            // });
+            gsap.timeline({ repeat: -1, yoyo: true }) // repeat forever
+            .to("#categories-hover-element", {
+                translateX: "300px",
+                duration: 2,
+                rotateZ: 80,
+            })
+            .to("#categories-hover-element", {
+                translateX: "560px",
+                duration: 2,
+                rotateZ: 100,
+            })
+            .to("#categories-hover-element", {
+                translateX: "0",
+                duration: 2,
+                rotateZ: 75,
+            });
     }, []);
 
     const navigate = useNavigate();
@@ -475,24 +525,23 @@ export const HomePage = () => {
                     </div>
                 </section>
                 <section id="categories" className="playfair-display opacity-0 relative w-full flex items-center snap-start h-[100vh] overflow-hidden flex-col" onMouseMove={( event ) => {
-                    if ( event.pageX < 465 || event.pageX > 1200 ) return;
-                    if ( event.pageX < 750 )
-                        elementRotate = (75 + ((event.pageX-465) / 10)); 
-                    else
-                    elementRotate = (75 + ((event.pageX-465) / 10)) - (((event.pageX - 465) * 1) / 30);
-                    console.log(event.pageX, elementRotate);
-                    gsap.to("#categories-hover-element", {
-                        // translateX: event.pageX,
-                        // x: (event.pageX > 500) && (event.pageX < 1200) ? event.pageX-465 : "",
-                        x: event.pageX-465,
-                        duration: 0.5,
-                        rotateZ: elementRotate,
-                    });
+                    // if ( event.pageX < 465 || event.pageX > 1200 ) return;
+                    // if ( event.pageX < 750 )
+                    //     elementRotate = (75 + ((event.pageX-465) / 10)); 
+                    // else
+                    // elementRotate = (75 + ((event.pageX-465) / 10)) - (((event.pageX - 465) * 1) / 30);
+                    // console.log(event.pageX, elementRotate);
+                    // gsap.to("#categories-hover-element", {
+                    //     // translateX: event.pageX,
+                    //     // x: (event.pageX > 500) && (event.pageX < 1200) ? event.pageX-465 : "",
+                    //     x: event.pageX-465,
+                    //     duration: 0.5,
+                    //     rotateZ: elementRotate,
+                    // });
                 }}>
                     <div className="gap-4 py-[5%] flex text-[#BFA6A1] text-[75px] h-[100%] justify-center w-[80%] relative ">
                         <div className="flex-1 h-full cursor-pointer flex justify-center items-center z-10" onClick={(e) => {
                             e.preventDefault();
-                            navigate("/collections");
                         }} onMouseOver={() => {
                             // @ts-ignore
                             categoriesImageRef.current.src = "/ring.png";
@@ -513,7 +562,10 @@ export const HomePage = () => {
                 </section>
                 <section id="shop-by-budget" className="w-full snap-start opacity-0 min-h-screen playfair-display relative mb-14 justify-center items-center">
                     {/* <div className="flex bg-yellow-900/50 rotate-z-[-30deg] w-[80%] justify-between overflow-x-hidden overflow-y-hidden py-10"> */}
-                        <div id="shop-by-budget-hexagon-1" className="w-[500px] shop-by-budget-hexagon hover:cursor-pointer absolute overflow-hidden flex justify-center items-center top-[20%] left-[10%]" style={{
+                        <div onClick={(e) => {
+                            e.preventDefault();
+                            navigate("/collections?filter=60k");
+                        }} id="shop-by-budget-hexagon-1" className="w-[500px] shop-by-budget-hexagon hover:cursor-pointer absolute overflow-hidden flex justify-center items-center top-[20%] left-[10%]" style={{
                         // <div id="shop-by-budget-hexagon-1" className="hover:cursor-pointer absolute overflow-hidden flex justify-center items-center top-[20%] left-[10%]" style={{
                             aspectRatio: "1/cos(30deg)",
                             // borderRadius: "9999px",
@@ -526,7 +578,10 @@ export const HomePage = () => {
                             </p>
                             <img src="/KultivatedKaratsAssets/shop-by-budget-1.png" className="top-0 bottom-0 hover:cursor-pointer rotate-z-[30deg] left-0 right-0 object-cover absolute" alt="" />
                         </div>
-                        <div id="shop-by-budget-hexagon-2" className="w-[300px] shop-by-budget-hexagon absolute hover:cursor-pointer overflow-hidden flex justify-center items-center top-[15%] left-[45%]" style={{
+                        <div onClick={(e) => {
+                            e.preventDefault();
+                            navigate("/collections?filter=30k");
+                        }} id="shop-by-budget-hexagon-2" className="w-[300px] shop-by-budget-hexagon absolute hover:cursor-pointer overflow-hidden flex justify-center items-center top-[15%] left-[45%]" style={{
                         // <div id="shop-by-budget-hexagon-2" className="absolute hover:cursor-pointer overflow-hidden flex justify-center items-center top-[15%] left-[45%]" style={{
                             aspectRatio: "1/cos(30deg)",
                             clipPath: "polygon(50% -50%,100% 50%,50% 150%,0 50%)",
@@ -549,7 +604,10 @@ export const HomePage = () => {
                             </p>
                             <img src="/katana.svg" className="top-0 bottom-0 rotate-z-[30deg] left-0 right-0 object-cover absolute" alt="" />
                         </div> */}
-                        <div id="shop-by-budget-hexagon-3" className="w-[150px] shop-by-budget-hexagon shop-by-budget-hexagon z-10 absolute hover:cursor-pointer overflow-hidden flex justify-center items-center top-[15%] right-[22%]" style={{
+                        <div onClick={(e) => {
+                            e.preventDefault();
+                            navigate("/collections?filter=15k");
+                        }} id="shop-by-budget-hexagon-3" className="w-[150px] shop-by-budget-hexagon shop-by-budget-hexagon z-10 absolute hover:cursor-pointer overflow-hidden flex justify-center items-center top-[15%] right-[22%]" style={{
                         // <div id="shop-by-budget-hexagon-3" className="z-10 absolute hover:cursor-pointer overflow-hidden flex justify-center items-center top-[15%] right-[22%]" style={{
                             aspectRatio: "1/cos(30deg)",
                             clipPath: "polygon(50% -50%,100% 50%,50% 150%,0 50%)",
@@ -755,27 +813,30 @@ export const HomePage = () => {
                     </div>
                 </section>
                 <section id="testimonials" className="w-[80%] opacity-0 snap-start playfair-display! justify-self-center sm:h-screen flex flex-col">
-                    <div className="flex-1 flex w-full relative">
+                    <div className="flex-1 flex-col flex w-full relative">
                         <div className="flex-1 ">
                             <div className="text-[#BFA6A1] w-1/2 text-[200%] mb-14 sm:mb-0 sm:text-[500%]">
                                 What people say
                             </div>
                         </div>
-                        <div className="sm:flex-1 flex-[0.25] relative">
+                        {/* <div className="sm:flex-1 flex-[0.25] relative">
                             <div className="sm:h-[80%] h-[100px] right-0 sm:-bottom-[20%] -bottom-[10%] z-50 absolute aspect-square rounded-full bg-[#A68A7E]">
                                 <img src="https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1" className="w-full h-full object-cover rounded-full" alt="" />
                             </div>
+                        </div> */}
+                        <div>
+                            {TESTIMONIALS.map(testimonial => <TestimonialCard name={testimonial?.customerName} rating={testimonial?.rating} imageUrl={testimonial?.sourceLogo?.url} text={testimonial?.descripttion} />)}
                         </div>
-                        <img src="/double-quotes.svg" className="z-0 sm:-bottom-[22%] -bottom-[70%] scale-50 sm:scale-100 absolute sm:left-[50%] left-0 sm:-translate-x-1/2" alt="" />
+                        {/* <img src="/double-quotes.svg" className="z-0 sm:-bottom-[22%] -bottom-[70%] scale-50 sm:scale-100 absolute sm:left-[50%] left-0 sm:-translate-x-1/2" alt="" /> */}
                     </div>
-                    <div className="flex-1 w-full sm:rounded-ee-[200px] rounded-ee-[100px] flex items-center pt-[5%] pl-[5%] bg-[#BFA6A1] z-10">
+                    {/* <div className="flex-1 w-full sm:rounded-ee-[200px] rounded-ee-[100px] flex items-center pt-[5%] pl-[5%] bg-[#BFA6A1] z-10">
                         <div className="inria-serif-regular w-[70%] h-[100%] relative rounded-[inherit] sm:text-3xl text-lg text-white">
                             I couldn’t be happier with my decision to purchase a lab-grown diamond from Kultivated Carats! From start to finish, the experience was exceptional. The website was easy to navigate, and I really appreciated the transparency about the diamond’s origin and the sustainable practices behind its creation.
                             <div className="absolute font-[montserrat] bottom-[10%] italic right-0 text-sm">
                                 Karandeep
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </section>
                 <BlogSection />
             </div>
@@ -828,10 +889,10 @@ const BlogSection = () => {
                     {BLOGDATA?.map((blog, index) => {
                         return (
                             // <Link to={`/blogs/${blog._id}`} className="hover:scale-110 transition-all">
-                                <div className={cn(`flex flex-col w-36 h-full hover:scale-120 transition-all hover:cursor-pointer`, selectedBlog == index && `scale-110` )} onClick={() => {
+                                <div className={cn(`flex flex-col w-auto h-full hover:scale-120 transition-all hover:cursor-pointer`, selectedBlog == index && `scale-110` )} onClick={() => {
                                     setSelectedBlog(index);
                                 }}>
-                                    <img src={blog.blogImageUrl?.url} alt="" className="w-36 min-h-[80%] object-cover" />
+                                    <img src={blog.blogImageUrl?.url} alt="" className="w-auto min-h-[80%] h-full object-cover" />
                                     <p className="h-full flex justify-center items-center">{blog?.title}</p>
                                 </div>
                             // </Link>
@@ -839,7 +900,7 @@ const BlogSection = () => {
                     })}
                 </div>
                 <div className="flex w-[80%] self-center justify-self-center h-[75%]">
-                    <img src={BLOGDATA[selectedBlog]?.blogImageUrl?.url} alt="" className="flex-1 w-1/2 object-cover" />
+                    <img src={BLOGDATA[selectedBlog]?.blogImageUrl?.url} alt="" className="flex-1 h-auto" />
                     <div className="flex-1 gap-8 px-10 flex justify-center flex-col">
                         <p>{BLOGDATA[selectedBlog]?.blogContent?.description}</p>
                         <Button className="bg-[#BFA6A1] text-white hover:text-white hover:bg-[#8b7a76] w-36 font-medium px-4 py-2 rounded-none" onClick={(e) => {

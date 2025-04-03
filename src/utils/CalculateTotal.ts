@@ -19,15 +19,15 @@ const getSolRate = (value : number) => {
 
 export const getDiamondPrice = ({ karat, netWeight, solitareWeight, multiDiaWeight, pointersWeight } : { karat: number, netWeight : number, solitareWeight: number, multiDiaWeight: number, pointersWeight?: number }) => {
     // const grossWeight = ((solitareWeight + multiDiaWeight) / 5) + netWeight;
-    const grossWeight = (netWeight + ((pointersWeight ? (solitareWeight + multiDiaWeight + pointersWeight) : (solitareWeight + multiDiaWeight)) * 0.2));
-    const GoldRate = netWeight * (karat == 14 ? goldRate14K : goldRate18K);
+    const grossWeight = Math.round(netWeight + ((pointersWeight ? (solitareWeight + multiDiaWeight + pointersWeight) : (solitareWeight + multiDiaWeight)) * 0.2));
+    const GoldRate = Math.round(netWeight * (karat == 14 ? goldRate14K : goldRate18K));
     const solitareRate = getSolRate(solitareWeight);
     const multiDiaRate = multiDiaWeight * 30000;
     const pointersRate = pointersWeight ? pointersWeight * 48000 : 0;
     const diamondRate = solitareRate + multiDiaRate + pointersRate;
     const makingCharges = grossWeight * 1200;
-    const subTotal = GoldRate + diamondRate + makingCharges;
-    const total = subTotal + (subTotal * (GST / 100));
+    const subTotal = Math.round(GoldRate + diamondRate + makingCharges);
+    const total = Math.round(subTotal + (subTotal * (GST / 100)));
     console.log(grossWeight, GoldRate, solitareRate, multiDiaRate, diamondRate, makingCharges, subTotal, total);
     return { subTotal, total, grossWeight, GoldRate, solitareRate, multiDiaRate, pointersRate, diamondRate, makingCharges };
 };
@@ -42,8 +42,8 @@ export const getGemstoneWeight= ({ isGemstone, isColouredDaimond, netWeight, kar
     const pointersRate = isGemstone ? pointerWeight * GEMSTONEPERKARAT : isColouredDaimond ? pointerWeight * COLOUREDDAIMONDRATEPERCARAT : 0;
     const multiDiaRate = multiDiaWeight * 30000;
     const diamondRate = solitareRate + multiDiaRate + pointersRate;
-    const makingCharges = grossWeight * 1200;
+    const makingCharges = (grossWeight * 1200);
     const subTotal = GoldRate + diamondRate + makingCharges;
-    const total = subTotal + (subTotal * (GST / 100));
-    return total;
+    const total = Math.round(subTotal + (subTotal * (GST / 100)));
+    return { grossWeight, GoldRate, solitareRate, multiDiaRate, diamondRate, makingCharges, subTotal, total };
 }

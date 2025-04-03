@@ -88,7 +88,7 @@ export interface ICollection {
     _id?: string,
     name: string,
     banners?: [],
-    products?: []
+    products?: IProduct[]
 };
 
 export interface IUser {
