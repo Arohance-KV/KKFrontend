@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { BLOGDATA } from "@/utils/constants";
 import { TestimonialCard } from "./Text";
+import CategoriesSection from "./HoverElement";
 
 const Reel = ({ reel } : { reel: {title: string, url: string, product: string }}) => {
     return (
@@ -58,12 +59,39 @@ const TESTIMONIALS = [
     {
         customerName: "Karandeep",
         rating: 5,
-        descripttion: `I couldn’t be happier with my decision to purchase a lab-grown diamond from Kultivated Carats! From start to finish, the experience was exceptional. The website was easy to navigate, and I really appreciated the transparency about the diamond’s origin and the sustainable practices behind its creation.`,
+        descripttion: `I couldn’t be happier with my decision to purchase a lab-grown diamond from Kultivated Carats! From start to finish, the experience was exceptional. The website was easy to navigate, and I really appreciated the transparency about the diamond’s origin and the sustainable practices behind its creation.`,
         sourceLogo: {
-            url: `https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1`,
-            publicId: ""
-        }
-    }
+          url: `https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1`,
+          publicId: ""
+        },
+      },
+      {
+        customerName: "Aarav",
+        rating: 4,
+        descripttion: `A truly stunning diamond! I was amazed at the brilliance and quality. I highly recommend Kultivated Carats!`,
+        sourceLogo: {
+          url: `https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1`,
+          publicId: ""
+        },
+      },
+      {
+        customerName: "Simran",
+        rating: 5,
+        descripttion: `Ethical, beautiful, and affordable. This diamond exceeded all my expectations!`,
+        sourceLogo: {
+          url: `https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1`,
+          publicId: ""
+        },
+      },
+      {
+        customerName: "Rohan",
+        rating: 4,
+        descripttion: `Great craftsmanship and attention to detail. My fiancé loves it!`,
+        sourceLogo: {
+          url: `https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1`,
+          publicId: ""
+        },
+      }
 ]
 
 export const HomePage = () => {
@@ -73,6 +101,7 @@ export const HomePage = () => {
             // width: "100%",
             opacity: "100%"
             // scrollTrigger: 
+        
         });
 
         // Categories element animation
@@ -349,8 +378,8 @@ export const HomePage = () => {
                         Explore the exquisite collections by Kultivated Karats, where elegance meets perfection.
                         Discover timeless jewelry crafted with brilliance, elegance, and sustainable luxury at Kultivated Karats.
                     </p>
-                    <Button onClick={(e) => {
-                        e.preventDefault();
+                    <Button onClick={() => {
+                        
                         navigate("/collections");
                     }} className="bg-[#E9D6C8] px-10 text-white rounded-none transition-all border-2 hover:text-[#BFA6A1] hover:bg-white border-[#BFA6A1]">See more</Button>
                     <div id="carousel" className="bg-pink-300/30 aspect-video h-[80%]">
@@ -541,7 +570,7 @@ export const HomePage = () => {
                     // });
                 // }}
                 >
-                    <div className="gap-4 py-[5%] flex text-[#BFA6A1] text-[75px] h-[100%] justify-center w-[80%] relative ">
+                    {/* <div className="gap-4 py-[5%] flex text-[#BFA6A1] text-[75px] h-[100%] justify-center w-[80%] relative ">
                         <div className="flex-1 h-full cursor-pointer flex justify-center items-center z-10" onClick={(e) => {
                             e.preventDefault();
                         }} onMouseOver={() => {
@@ -559,7 +588,8 @@ export const HomePage = () => {
                         <div id="categories-hover-element" className="absolute bg-[#E9D6C8] z-[0] w-[350px] top-1/2 flex justify-end items-end -translate-y-1/2 overflow-hidden left-[10%] aspect-video rotate-[75deg]">
                             <img ref={categoriesImageRef} src="/ring.png" className="-rotate-[120deg] h-auto -translate-y-[10%] w-[70%]" alt="" />
                         </div>
-                    </div>
+                    </div> */}
+                    <CategoriesSection />
                         <Button className="hover:bg-transparent text-[#BFA6A1] absolute bottom-[5%] right-[10%] bg-transparent playpen-sans text-2xl hover:scale-110 transition-all">See more <ArrowRight /></Button>
                 </section>
                 <section id="shop-by-budget" className="w-full snap-start opacity-0 min-h-screen playfair-display relative mb-14 justify-center items-center">
@@ -826,9 +856,18 @@ export const HomePage = () => {
                                 <img src="https://i2.wp.com/appfinite.com/wp-content/plugins/wp-first-letter-avatar/images/default/256/latin_k.png?ssl=1" className="w-full h-full object-cover rounded-full" alt="" />
                             </div>
                         </div> */}
-                        <div>
-                            {TESTIMONIALS.map(testimonial => <TestimonialCard name={testimonial?.customerName} rating={testimonial?.rating} imageUrl={testimonial?.sourceLogo?.url} text={testimonial?.descripttion} />)}
-                        </div>
+                      <div className="flex space-x-4 mb-6 mt-0">
+  {TESTIMONIALS.map((testimonial, index) => (
+    <TestimonialCard
+      key={index}
+      name={testimonial?.customerName}
+      rating={testimonial?.rating}
+      imageUrl={testimonial?.sourceLogo?.url}
+      text={testimonial?.descripttion}
+    />
+  ))}
+</div>
+
                         {/* <img src="/double-quotes.svg" className="z-0 sm:-bottom-[22%] -bottom-[70%] scale-50 sm:scale-100 absolute sm:left-[50%] left-0 sm:-translate-x-1/2" alt="" /> */}
                     </div>
                     {/* <div className="flex-1 w-full sm:rounded-ee-[200px] rounded-ee-[100px] flex items-center pt-[5%] pl-[5%] bg-[#BFA6A1] z-10">
@@ -883,7 +922,7 @@ const BlogSection = () => {
     const navigate = useNavigate();
 
     return (
-        <section id="blog-section" className="w-[80%] relative playfair-display transition-all snap-start text-[#BFA6A1] aspect-video flex flex-col gap-8 my-36 justify-self-center">
+        <section id="blog-section" className="w-[80%] relative playfair-display transition-all snap-start text-[#BFA6A1] aspect-video flex flex-col gap-8 my-48 mt-16 justify-self-center">
             <div id="blog-section-slide" className="absolute w-2/3 h-[66%] bg-[#E1C6B3] shadow-md -z-1 -left-[100%] top-[20%]"></div>
             <p className="blog-section-fade text-5xl justify-self-end self-end">Read the blog</p>
             <div className="h-full blog-section-fade w-full  gap-4 flex flex-col">
@@ -905,15 +944,15 @@ const BlogSection = () => {
                     <img src={BLOGDATA[selectedBlog]?.blogImageUrl?.url} alt="" className="flex-1 h-auto" />
                     <div className="flex-1 gap-8 px-10 flex justify-center flex-col">
                         <p>{BLOGDATA[selectedBlog]?.blogContent?.description}</p>
-                        <Button className="bg-[#BFA6A1] text-white hover:text-white hover:bg-[#8b7a76] w-36 font-medium px-4 py-2 rounded-none" onClick={(e) => {
-                            e.preventDefault();
+                        <Button className="bg-[#BFA6A1] text-white hover:text-white hover:bg-[#8b7a76] w-36 font-medium px-4 py-2 rounded-none" onClick={() => {
+                            
                             navigate(`/blogs/${BLOGDATA[selectedBlog]?._id}`);
                         }}>See more</Button>
                     </div> 
                 </div>
             </div>
-            <Button className="text-[#8b7a76] bg-transparent hover:bg-transparent text-3xl absolute bottom-[5%] right-0" onClick={(e) => {
-                e.preventDefault();
+            <Button className="text-[#8b7a76] bg-transparent hover:bg-transparent text-3xl absolute bottom-[5%] right-0" onClick={() => {
+                
                 navigate("/blogs/");
             }}>See all</Button>
         </section>

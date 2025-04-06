@@ -1,13 +1,28 @@
-export function TestimonialCard({ name, text, rating, imageUrl } : { name: string, text: string, rating: number, imageUrl: string}) {
+import { useEffect, useRef } from "react";
+
+export function TestimonialCard({
+  name,
+  text,
+  rating,
+  imageUrl,
+}: {
+  name: string;
+  text: string;
+  rating: number;
+  imageUrl: string;
+}) {
   const stars = Array.from({ length: 5 }, (_, index) => index < rating);
 
   return (
-    <div className="bg-tan-light p-6 rounded-lg shadow-md w-full sm:w-80 relative">
+    <div className="bg-tan-light p-6 rounded-lg shadow-md w-full sm:w-80 relative flex-shrink-0 inline-block mx-2">
       <div className="flex items-center space-x-4">
-        <div className="w-16 h-16 rounded-full bg-white flex-shrink-0">
-          {/* Replace with actual image */}
+        <div className="w-16 h-16 rounded-full bg-white flex-shrink-0 overflow-hidden">
           {imageUrl ? (
-            <img src={imageUrl} alt={name} className="w-full h-full rounded-full object-cover" />
+            <img
+              src={imageUrl}
+              alt={name}
+              className="w-full h-full rounded-full object-cover"
+            />
           ) : (
             <div className="w-full h-full rounded-full bg-white"></div>
           )}
@@ -18,8 +33,10 @@ export function TestimonialCard({ name, text, rating, imageUrl } : { name: strin
             {stars.map((filled, index) => (
               <svg
                 key={index}
-                className={`w-4 h-4 ${filled ? 'text-yellow-400' : 'text-gray-300'}`}
-                fill={filled ? 'currentColor' : 'none'}
+                className={`w-4 h-4 ${
+                  filled ? "text-yellow-400" : "text-gray-300"
+                }`}
+                fill={filled ? "currentColor" : "none"}
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -36,36 +53,56 @@ export function TestimonialCard({ name, text, rating, imageUrl } : { name: strin
         </div>
       </div>
       <p className="mt-4 text-sm text-gray-600">{text}</p>
-      {/* Preview Element */}
-      <div className="absolute bottom-2 left-2 bg-pink-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">
-        1
-      </div>
     </div>
   );
 }
 
-export default function Text() {
+export default function TestimonialMarquee() {
+  const marqueeRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const marquee = marqueeRef.current;
+    let animationFrame: number;
+
+    const scrollSpeed = 3;
+
+    const step = () => {
+      if (marquee) {
+        marquee.scrollLeft += scrollSpeed;
+        console.log("scroll left : ", marquee.scrollLeft);
+        const scrollWidth = marquee.scrollWidth / 2;
+
+        if (marquee.scrollLeft >= scrollWidth) {
+          marquee.scrollLeft = 0;
+        }
+      }
+      animationFrame = requestAnimationFrame(step);
+    };
+
+    animationFrame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
+
+  // Create cards and duplicate them
+  const testimonials = [...Array(9)].map((_, index) => (
+    <TestimonialCard
+      key={index}
+      name="Lorem ipsum"
+      text="Lorem ipsum dolor sit amet consectetur. Pellentesque lectus tincidunt eget venenatis."
+      rating={4 + (index % 2)}
+      imageUrl=""
+    />
+  ));
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="flex space-x-4">
-        <TestimonialCard
-          name="Lorem ipsum"
-          text="Lorem ipsum dolor sit amet consectetur. Pellentesque lectus tincidunt eget venenatis."
-          rating={4}
-          imageUrl="" // Replace with actual image URL
-        />
-        <TestimonialCard
-          name="Lorem ipsum"
-          text="Lorem ipsum dolor sit amet consectetur. Pellentesque lectus tincidunt eget venenatis."
-          rating={5}
-          imageUrl="" // Replace with actual image URL
-        />
-      </div>
-      {/* Navigation Arrows (Optional) */}
-      <div className="flex justify-between w-full mt-8">
-        <button className="text-gray-500 hover:text-gray-700">←</button>
-        <button className="text-gray-500 hover:text-gray-700">→</button>
+    <div className="relative flex items-center justify-center bg-gray-100 overflow-hidden py-10">
+      <div
+        ref={marqueeRef}
+        className="flex overflow-x-hidden whitespace-nowrap w-full"
+      >
+        <div className="flex space-x-4">{testimonials}</div>
+        <div className="flex space-x-4">{testimonials}</div>
       </div>
     </div>
   );
-};
+}
